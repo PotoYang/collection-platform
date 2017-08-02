@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- <export>配置 -->
+<!-- id:为全局唯一整数-->
+<!-- type:jdbc  每次单独获取连接，然后输入一批数据-->
+<!--      jdbc_pool 使用连接池输出数据-->
+<!--      jdbc_pool_tolerant 容错连接池输出，一批数据中有错误数据时，其他数据正常提交-->
+<!-- dataType: 数据描述全局标识-->
+<!-- target: 数据库输出填写数据源-->
+<!--         文件输出填写文件路径和名称-->
+<!-- enable: 开关,true时可用 -->
+<!--    <table>: name 数据库输出时填写表名 -->
+<!--    <columns>:数据输出对应字段列表 -->
+<!--         <column>  -->
+<!--             name:表字段名  -->
+<!--             property:数据字段名  -->
+<!--             format:数据为字符串时间格式  -->
+<templates>
+    <export id="11001" type="jdbc_batch" dataType="yz_alarm" batchNumber="100" target="exportTarger" enable="true">
+        <table name="t_yz_alarm"/>
+        <columns>
+            <column name="id" />
+            <column name="sn" />
+            <column name="create_time" />
+            <column name="warning_type" />
+            <column name="warning_desc" />
+            <column name="warning_value" />
+            <column name="lpn_code" />
+            <column name="vehicle_id" />
+        </columns>
+    </export>
+    <export id="11002" type="jdbc_batch" dataType="yz_fault_code" batchNumber="100" target="exportTarger" enable="true">
+        <table name="t_yz_fault_code"/>
+        <columns>
+            <column name="id" />
+            <column name="device_id" />
+            <column name="create_time" />
+            <column name="dtc_value" />
+            <column name="dtc_status" />
+            <column name="gps_time" />
+        </columns>
+    </export>
+    <export id="11003" type="jdbc_batch" dataType="yz_realtime_data" batchNumber="100" target="exportTarger" enable="true">
+        <table name="t_yz_realtime_data"/>
+        <columns>
+            <column name="id" />
+            <column name="device_id" />
+            <column name="gps_time" />
+            <column name="create_time" />
+            <column name="lamp_far" />
+            <column name="lamp_near" />
+            <column name="lamp_width" />
+            <column name="lamp_fog" />
+            <column name="lamp_left_turn" />
+            <column name="lamp_right_turn" />
+            <column name="lamp_danger" />
+            <column name="door_left_front" />
+            <column name="door_right_front" />
+            <column name="door_left_rear" />
+            <column name="door_right_rear" />
+            <column name="door_trunk" />
+            <column name="lock_whole_car" />
+            <column name="lock_left_front" />
+            <column name="lock_right_front" />
+            <column name="lock_left_rear" />
+            <column name="lock_right_rear" />
+            <column name="lock_trunk" />
+            <column name="window_left_front" />
+            <column name="window_right_front" />
+            <column name="window_left_rear" />
+            <column name="window_right_rear" />
+            <column name="window_dormer" />
+            <column name="fault_signal_ecm" />
+            <column name="fault_signal_abs" />
+            <column name="fault_signal_srs" />
+            <column name="fault_signal_oil" />
+            <column name="fault_signal_pressure" />
+            <column name="fault_signal_maintenance" />
+            <column name="brake_hand" />
+            <column name="brake_foot" />
+            <column name="seat_belts_driver" />
+            <column name="seat_belts_copilot" />
+            <column name="acc_status" />
+            <column name="key_status" />
+            <column name="remote_control_signal" />
+            <column name="wiper_status" />
+            <column name="air_conditioning_status" />
+            <column name="gear" />
+            <column name="all_mileage" />
+            <column name="endurance_mileage" />
+            <column name="fuel_consumption" />
+            <column name="water_temperature" />
+            <column name="engine_inlet_temperature" />
+            <column name="air_conditioning_temperature" />
+            <column name="battery_voltage" />
+            <column name="wheel_speed_left_front" />
+            <column name="wheel_speed_right_front" />
+            <column name="wheel_speed_left_rear" />
+            <column name="wheel_speed_right_rear" />
+            <column name="speed" />
+            <column name="rotating_speed" />
+            <column name="fuel_consumption_average" />
+            <column name="fuel_consumption_instant_km" />
+            <column name="fuel_consumption_instant_h" />
+            <column name="oil_lifetime" />
+            <column name="air_flow" />
+            <column name="MAP" />
+            <column name="accelerator_pedal_relative_position" />
+            <column name="accelerator" />
+            <column name="steering_wheel_angle" />
+            <column name="steering_wheel_status" />
+            <column name="residual_oil_volume_after_filtering_l" />
+            <column name="residual_oil_volume_after_filtering_p" />
+            <column name="total_mileage" />
+            <column name="trip_uid" />
+            <column name="apk_battery_voltage" />
+            <column name="acceleration" />
+            <column name="brake_pedal_relative_position" />
+        </columns>
+    </export>
+    <export id="11004" type="jdbc_batch" dataType="yz_gps" batchNumber="100" target="exportTarger" enable="true">
+        <table name="t_yz_gps"/>
+        <columns>
+            <column name="id" />
+            <column name="device_id" />
+            <column name="gps_time" />
+            <column name="latitude" />
+            <column name="longitude" />
+            <column name="height" />
+            <column name="speed" />
+            <column name="direction" />
+            <column name="create_time" />
+            <column name="accuracy" />
+            <column name="gps_locate_model" />
+        </columns>
+    </export>
+    <export id="11005" type="jdbc_batch" dataType="yz_medical_report" batchNumber="100" target="exportTarger" enable="true">
+        <table name="t_device_medical_report"/>
+        <columns>
+            <column name="id" />
+            <column name="device_uid" />
+            <column name="create_time" />
+            <column name="examination_time" />
+            <column name="report_content" />
+        </columns>
+    </export>
+</templates>

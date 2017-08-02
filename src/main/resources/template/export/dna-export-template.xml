@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- <export>配置 -->
+<!-- id:为全局唯一整数-->
+<!-- type:jdbc  每次单独获取连接，然后输入一批数据-->
+<!--      jdbc_pool 使用连接池输出数据-->
+<!--      jdbc_pool_tolerant 容错连接池输出，一批数据中有错误数据时，其他数据正常提交-->
+<!-- dataType: 数据描述全局标识-->
+<!-- target: 数据库输出填写数据源-->
+<!--         文件输出填写文件路径和名称-->
+<!-- enable: 开关,true时可用 -->
+<!--    <table>: name 数据库输出时填写表名 -->
+<!--    <columns>:数据输出对应字段列表 -->
+<!--         <column>  -->
+<!--             name:表字段名  -->
+<!--             property:数据字段名  -->
+<!--             format:数据为字符串时间格式  -->
+<templates>
+    <export id="10001" type="jdbc_batch" dataType="dna_gps" batchNumber="100" target="exportTarger" enable="true">
+        <table name="t_dna_gps"/>
+        <columns>
+            <column name="device_id" property="id"/>
+            <column name="time_stamp"/>
+            <column name="latitude"/>
+            <column name="longitude"/>
+            <column name="altitude"/>
+            <column name="speed"/>
+            <column name="direction"/>
+            <column name="satellites"/>
+            <column name="output_status"/>
+            <column name="battery_vehicle"/>
+            <column name="acc_status"/>
+        </columns>
+    </export>
+    <export id="10002" type="jdbc_batch" dataType="dna_can" batchNumber="100" target="exportTarger" enable="true">
+        <table name="t_dna_can"/>
+        <columns>
+            <column name="id" />
+            <column name="time_stamp"/>
+            <column name="acc_status"/>
+            <column name="security_status"/>
+            <column name="door_lf_status"/>
+            <column name="door_rf_status"/>
+            <column name="door_lb_status"/>
+            <column name="door_rb_status"/>
+            <column name="door_trunk_status"/>
+            <column name="window_lf_status"/>
+            <column name="window_rf_status"/>
+            <column name="window_lb_status"/>
+            <column name="window_rb_status"/>
+            <column name="lock_lf_status"/>
+            <column name="lock_rf_status"/>
+            <column name="lock_lb_status"/>
+            <column name="lock_rb_status"/>
+            <column name="lock_trunk_status"/>
+            <column name="lamp_status"/>
+            <column name="dtcs"/>
+            <column name="obd_requirement"/>
+            <column name="vehicle_voltage"/>
+            <column name="engine_rpm"/>
+            <column name="vehicle_speed"/>
+            <column name="intake_air_temperature"/>
+            <column name="engine_coolant_temperature"/>
+            <column name="environment_temperature"/>
+            <column name="intake_manifold_pressure"/>
+            <column name="fuel_pressure"/>
+            <column name="barometric_pressure"/>
+            <column name="air_flow_sensor"/>
+            <column name="throttle_position_sensor"/>
+            <column name="accelerator_pedal_position"/>
+            <column name="engine_run_time"/>
+            <column name="fault_vehicle_mileage"/>
+            <column name="oil_mass_fuel_level"/>
+            <column name="calculated_engine_load"/>
+            <column name="long_term_fuel_trim_bank_1"/>
+            <column name="spark_angle_before_tdc"/>
+            <column name="panel_mileage"/>
+            <column name="tire_pressue_lf"/>
+            <column name="tire_pressue_rf"/>
+            <column name="tire_pressue_lb"/>
+            <column name="tire_pressue_rb"/>
+            <column name="mileage_fuel_flag"/>
+            <column name="total_mileage"/>
+            <column name="total_fuel_consumption"/>
+        </columns>
+    </export>
+</templates>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- <export>配置 -->
+<!-- id:为全局唯一整数-->
+<!-- type:jdbc  每次单独获取连接，然后输入一批数据-->
+<!--      jdbc_pool 使用连接池输出数据-->
+<!--      jdbc_pool_tolerant 容错连接池输出，一批数据中有错误数据时，其他数据正常提交-->
+<!-- dataType: 数据描述全局标识-->
+<!-- target: 数据库输出填写数据源-->
+<!--         文件输出填写文件路径和名称-->
+<!-- enable: 开关,true时可用 -->
+<!--    <table>: name 数据库输出时填写表名 -->
+<!--    <columns>:数据输出对应字段列表 -->
+<!--         <column>  -->
+<!--             name:表字段名  -->
+<!--             property:数据字段名  -->
+<!--             format:数据为字符串时间格式  -->
+<templates>
+    <export id="1" type="jdbc_batch" dataType="test_data" batchNumber="100" target="exportTarger" enable="true">
+        <table name="t_data_test"/>
+        <columns>
+            <column name="id" property="id"/>
+            <column name="version"/>
+            <column name="version_code" property="versionCode"/>
+            <column name="url"/>
+            <column name="size"/>
+            <column name="description" />
+            <column name="create_time"/>
+            <column name="create_user_id" property="createUserId"/>
+        </columns>
+    </export>
+</templates>

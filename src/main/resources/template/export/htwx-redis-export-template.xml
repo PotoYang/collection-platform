@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- <export>配置 -->
+<!-- id:为全局唯一整数-->
+<!-- type: redis缓存输出-->
+<!-- enable: 开关true时可用 -->
+<!-- key: redis的key值({}花括号内替换为record中的对应健值)-->
+<!-- option: 对应redis的操作-->
+<!-- timeout: 数据缓存有效期（秒）-->
+<!-- output: 输出record中单个键的值-->
+
+
+<templates type="redis" target="test_redis">
+
+    <!-- 根据设备ID分别缓存告警数据，以便汇总 -->
+    <!-- {}花括号内替换为record中的对应key的值 -->
+    <export id="12006" dataType="htwx_alarm" enable="true">
+        <key value="htwx_alarm_{device_id}"/>
+        <option type="zadd">
+            <score value="utctime"/>
+        </option>
+    </export>
+
+    <!-- 发送到告警消息队列 -->
+    <export id="12007" dataType="htwx_alarm" enable="true">
+        <key value="notificationStackCache:htwx_alarm_msg" />
+        <option type="lpush" />
+    </export>
+
+    <export id="12008" dataType="htwx_gps" enable="true">
+        <key value="htwx_gps_{device_id}"/>
+        <option type="zadd">
+            <score value="utctime"/>
+        </option>
+    </export>
+
+    <export id="12009" dataType="htwx_stat" enable="true">
+        <key value="htwx_stat_{device_id}"/>
+        <option type="zadd">
+            <score value="utctime"/>
+        </option>
+    </export>
+
+    <export id="12010" dataType="htwx_fault" enable="true">
+        <key value="htwx_fault_{device_id}"/>
+        <option type="zadd">
+            <score value="utctime"/>
+        </option>
+    </export>
+    <export id="12011" dataType="htwx_fault" enable="true">
+        <key value="htwx_fault_code_msg" />
+        <option type="lpush" />
+    </export>
+    
+    <export id="12012" dataType="htwx_snap" enable="true">
+        <key value="htwx_snap_{device_id}"/>
+        <option type="zadd">
+            <score value="utctime"/>
+        </option>
+    </export>
+</templates>

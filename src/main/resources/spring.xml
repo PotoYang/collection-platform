@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <import resource="spring-datasource.xml"/>
+
+    <bean id="taskInfoDAO" class="com.chh.dc.icp.db.dao.TaskInfoDAO">
+        <property name="dataSource" ref="mysql"/>
+    </bean>
+
+    <bean id="taskManager" class="com.chh.dc.icp.task.TaskManager">
+        <property name="taskLoader" ref="taskLoader"/>
+    </bean>
+
+    <bean id="taskLoader" class="com.chh.dc.icp.task.loader.JDBCTaskLoader">
+        <property name="taskInfoDAO" ref="taskInfoDAO"/>
+    </bean>
+
+
+    <!--  访问器 -->
+    <bean id="dataBaseAccessor" class="com.chh.dc.icp.accessor.DataBaseAccessor" scope="prototype">
+    </bean>
+
+    <bean id="redisStackAccessor" class="com.chh.dc.icp.accessor.RedisStackAccessor" scope="prototype">
+    </bean>
+
+    <!--  解析器 -->
+    <bean id="testParser" class="com.chh.dc.icp.parser.TestDbParser">
+    </bean>
+
+    <bean id="dnaGid22Parser" class="com.chh.dc.icp.parser.obd.DNAGID22Parser">
+    </bean>
+
+
+    <bean id="htwxSmart424Parser" class="com.chh.dc.icp.parser.obd.HTWXSmart424Parser" scope="prototype" init-method="init">
+    </bean>
+
+
+
+    <bean id="goloHttpAccessor" class="com.chh.dc.icp.accessor.GoloHttpAccessor" scope="prototype">
+    	<property name="deviceDAO" ref="deviceDAO"/>
+    </bean>
+    <bean id="goloOpenApiParser" class="com.chh.dc.icp.parser.obd.GoloOpenApiParser" scope="prototype">
+    </bean>
+    <bean id="deviceDAO" class="com.chh.dc.icp.db.dao.DeviceDAO">
+        <property name="dataSource" ref="mysql"/>
+    </bean>
+    <bean id="dtcDAO" class="com.chh.dc.icp.db.dao.DtcDAO">
+        <property name="dataSource" ref="mysql"/>
+    </bean>
+    <bean id="OBDAlarmCodeConverter" class="com.chh.dc.icp.util.OBDAlarmCodeConverter">
+        <property name="dtcDao" ref="dtcDAO"/>
+    </bean>
+    
+    <!-- redisCache -->
+    <bean name="redisCache" class="com.chh.dc.icp.util.redis.RedisCache">
+        <property name="jedisFactory" ref="test_redis"/>
+    </bean>
+    
+</beans>
