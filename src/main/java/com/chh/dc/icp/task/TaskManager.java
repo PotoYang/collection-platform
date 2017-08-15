@@ -30,7 +30,7 @@ public class TaskManager extends Thread{
 	/**
 	 * 任务线程池
 	 */
-	private ExecutorService threadPool;
+    private ExecutorService threadPool;
 
 	/**
 	 * 触发器开关 当triggerFlag=false时 不会有新的任务提交
@@ -44,7 +44,8 @@ public class TaskManager extends Thread{
 
 	/**
 	 * 正在运行的任务的Map<br>
-	 * 同时使用workingTasks来进行并发控制,而不是使用线程池的线程并发控制,目的在于将运行队列提供给控制台用于显示<br>
+	 * 同时使用workingTasks来进行并发控制,而不是使用线程池的线程并发控制,
+     * 目的在于将运行队列提供给控制台用于显示<br>
 	 * 
 	 */
 	private Map<Long,TaskInfo> workingTasks = new HashMap<Long,TaskInfo>();
@@ -94,13 +95,18 @@ public class TaskManager extends Thread{
 					log.debug("任务已经在运行中. [task-name={}]", taskInfo.getName());
 					continue;
 				}
+				// 根据类型获取对应执行器
 				AbstractExecutor executor = ExecutorFactory.getExecutor(taskInfo);
+
 				//从warehouse申请仓库，如果仓库已经存在，则返回已经存在的实例
 				WareHouse wareHouse = GenericWareHouse.getInstance();
+
 				RepositoryArgs repositoryArgs = new RepositoryArgs();
 				repositoryArgs.setTaskInfo(taskInfo);
+
 				Repository repository = wareHouse.apply(repositoryArgs);
 				executor.setRepository(repository);
+
 				// 设置任务本次启动时间
 				service.submit(executor);
 				workingTasks.put(taskInfo.getId(), taskInfo);
@@ -124,8 +130,10 @@ public class TaskManager extends Thread{
 
 	private void initialize(){
 		taskLoader.start();
+
 		threadPool = Executors.newFixedThreadPool(10);
 		service = new ExecutorCompletionService<TaskFuture>(threadPool);
+
 		// 启动任务执行完毕后处理线程
 		listener = new Listener();
 		// 设置为守护线程

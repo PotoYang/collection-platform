@@ -44,8 +44,10 @@ public class JDBCTaskLoader extends TaskLoader {
                 List<TaskInfo> tempList = taskInfoDAO.getTaskList();
                 for (int i = 0; tempList != null && i < tempList.size(); i++) {
                     TaskInfo taskInfo = tempList.get(i);
+                    /// 采集周期
                     int collectPeriod = taskInfo.getCollectPeriodMin();
                     if (collectPeriod >= 0) {
+                        ///开始执行的时间
                         Timestamp sucDataTime = taskInfo.getDataTime();
                         if (sucDataTime == null || sucDataTime.getTime() > System.currentTimeMillis()) {
                             continue;

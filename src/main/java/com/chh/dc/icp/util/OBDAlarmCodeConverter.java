@@ -16,6 +16,7 @@ import com.chh.dc.icp.db.pojo.TDtc;
  */
 public class OBDAlarmCodeConverter {
 	private static final Logger log = LoggerFactory.getLogger(OBDAlarmCodeConverter.class);
+
     private static Map<String, Integer> htwx2CommonMap = new HashMap<>();
     private static Map<Integer, String> dtcMap = new HashMap<>(); 
     private static Map<Integer, String> commonAlarmMap = new HashMap<>();

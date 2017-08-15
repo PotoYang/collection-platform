@@ -8,7 +8,7 @@ import com.chh.dc.icp.db.pojo.TaskInfo;
  * 1、创建访问器对象<br>
  * 2、调用access方法，如果返回false，则结束访问<br>
  * 3、返回true，则应该循环调用getData方法获取数据源DataPackage<br>
- * 4、应为访问器一次可能返回多个数据源，所以需要循环调用getData方法，知道返回null
+ * 4、因为访问器一次可能返回多个数据源，所以需要循环调用getData方法，直到返回null
  *
  * @ClassName: AbstractAccessor
  * @since 1.0
@@ -26,8 +26,6 @@ public abstract class AbstractAccessor{
 
     /**
      * 获取数据源
-     *
-     *
      * @return
      */
     public abstract DataPackage getData();

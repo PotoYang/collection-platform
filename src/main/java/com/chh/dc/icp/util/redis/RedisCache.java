@@ -36,7 +36,7 @@ public class RedisCache {
 
     public static final int OPTION_KEYS = 10;
 
-    public static final int OPTION_ZCARD = 11;l
+    public static final int OPTION_ZCARD = 11;
 
     public static final int OPTION_ZRANGE = 12;
 

@@ -48,16 +48,16 @@
 
     <bean id="exportTarger" class="com.chh.dc.icp.warehouse.exporter.template.db.DBTarget">
         <property name="driver" value="com.mysql.jdbc.Driver"/>
-        <property name="url" value="jdbc:mysql://localhost:3306/obd_data_center?characterEncoding=utf8"/>
-        <property name="username" value="obdtest"/>
-        <property name="password" value="obdtest"/>
+        <property name="url" value="jdbc:mysql://123.249.3.137:3306/obd_data_center?characterEncoding=utf8"/>
+        <property name="username" value="root"/>
+        <property name="password" value="chhRootDB123"/>
     </bean>
 
     <bean id="mysql" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
         <property name="driverClass" value="com.mysql.jdbc.Driver"/>
-        <property name="jdbcUrl" value="jdbc:mysql://localhost:3306/obd_data_center?characterEncoding=utf8"/>
-        <property name="user" value="obdtest"/>
-        <property name="password" value="obdtest"/>
+        <property name="jdbcUrl" value="jdbc:mysql://123.249.3.137:3306/obd_data_center?characterEncoding=utf8"/>
+        <property name="user" value="root"/>
+        <property name="password" value="chhRootDB123"/>
         <!--连接池中保留的最大连接数。默认值: 15 -->
         <property name="maxPoolSize" value="15"/>
         <!-- 连接池中保留的最小连接数，默认为：3-->
