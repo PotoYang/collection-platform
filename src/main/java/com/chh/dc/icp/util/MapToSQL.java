@@ -49,7 +49,7 @@ public class MapToSQL {
             String column = "";
             if (type < 4) {
                 column = "int";
-            } else{
+            } else {
                 column = "bigint";
             }
             if (fieldInfo.getCoefficient() != null) {

@@ -8,7 +8,6 @@ import com.chh.dc.icp.warehouse.exporter.Exporter;
 public class ExportTemplate {
 
 
-
     /**
      * 模板ID,全局唯一
      */
@@ -56,7 +55,7 @@ public class ExportTemplate {
         return dataType;
     }
 
-     public void setDataType(String dataType) {
+    public void setDataType(String dataType) {
         this.dataType = dataType;
     }
 
@@ -77,7 +76,7 @@ public class ExportTemplate {
     }
 
     public boolean isDBExport() {
-        return Exporter.TYPE_JDBC_BATCH.equalsIgnoreCase(this.type) || Exporter.TYPE_JDBC_POOL.equalsIgnoreCase(this.type) ||  Exporter.TYPE_JDBC_POOL_FAULT_TOLERANT.equalsIgnoreCase(this.type);
+        return Exporter.TYPE_JDBC_BATCH.equalsIgnoreCase(this.type) || Exporter.TYPE_JDBC_POOL.equalsIgnoreCase(this.type) || Exporter.TYPE_JDBC_POOL_FAULT_TOLERANT.equalsIgnoreCase(this.type);
     }
 
 

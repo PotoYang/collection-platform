@@ -141,9 +141,9 @@ public abstract class HTWXReader extends ByteArrayReader {
     }
 
     protected List<ParsedRecord> readGPSData(byte[] bs, int start) {
-    	////flag 0x00 表示常规 GPS 数据上传 0x01 表示历史 GPS 数据上传
-    	int flag = ByteReaderUtil.readU8(bs, INDEX_DATA);
-    	String type = flag == 0 ? "htwx_gps" : "htwx_gps_his";
+        ////flag 0x00 表示常规 GPS 数据上传 0x01 表示历史 GPS 数据上传
+        int flag = ByteReaderUtil.readU8(bs, INDEX_DATA);
+        String type = flag == 0 ? "htwx_gps" : "htwx_gps_his";
         int index = start;
         int gpsCount = ByteReaderUtil.readInt(bs[index++]);
         if (gpsCount <= 0) {
@@ -159,8 +159,8 @@ public abstract class HTWXReader extends ByteArrayReader {
             record.putData("collection_time", now);
             //判断是否定位，如果未定位，则当做历史数据类型（历史数据类型不输出lastGpsCache）
             boolean isLocated = (boolean) record.getData("isLocated");
-            if(!isLocated){
-            	record.setType("htwx_gps_his");
+            if (!isLocated) {
+                record.setType("htwx_gps_his");
             }
             list.add(record);
         }
@@ -176,10 +176,10 @@ public abstract class HTWXReader extends ByteArrayReader {
         double lon = ByteReaderUtil.readU32(bs, index, true) / 3600000.0;
         index += 4;
         //speed cm/sec转成m/sec
-        map.put("speed", ByteReaderUtil.readU16(bs, index, true)/100.0);
+        map.put("speed", ByteReaderUtil.readU16(bs, index, true) / 100.0);
         index += 2;
         //dir 1/10度转成度
-        map.put("dir", ByteReaderUtil.readU16(bs, index, true)/10.0);
+        map.put("dir", ByteReaderUtil.readU16(bs, index, true) / 10.0);
         index += 2;
 //       读取valflag 小头bit7-bit0
         int ew = ByteReaderUtil.readBit(bs[index], 7 - 0);
@@ -202,8 +202,8 @@ public abstract class HTWXReader extends ByteArrayReader {
         String locatedNo = String.valueOf(ByteReaderUtil.readBit(valflagBytes, 7 - 2)) + ByteReaderUtil.readBit(valflagBytes, 7 - 3);
         //true：定位，false：未定位
         boolean isLocated = false;
-        if(StringUtil.isNotNull(locatedNo) && !"00".equals(locatedNo))
-        	isLocated = true;
+        if (StringUtil.isNotNull(locatedNo) && !"00".equals(locatedNo))
+            isLocated = true;
         map.put("isLocated", isLocated);
         return index;
     }

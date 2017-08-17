@@ -11,7 +11,7 @@ import java.util.Map;
 /**
  * Created by Niow on 2016/7/12.
  */
-public class TestDbParser extends AbstractParser{
+public class TestDbParser extends AbstractParser {
 
     private static final String DATA_TYPE_TEST_DATA = "test_data";
 
@@ -30,13 +30,13 @@ public class TestDbParser extends AbstractParser{
 
     @Override
     public void parse(TaskInfo taskInfo, DataPackage data) throws Exception {
-        rs = (ResultSet)data.getData();
+        rs = (ResultSet) data.getData();
     }
 
     @Override
     public ParsedRecord readRecord() throws Exception {
         boolean hasNext = rs.next();
-        if(!hasNext){
+        if (!hasNext) {
             return null;
         }
         recievedNum++;
@@ -47,15 +47,13 @@ public class TestDbParser extends AbstractParser{
         return record;
     }
 
-    private Map<String, Object> readData(ResultSet rs)  throws Exception {
+    private Map<String, Object> readData(ResultSet rs) throws Exception {
         Map<String, Object> map = new HashMap<String, Object>();
-        map.put("id",rs.getObject("id"));
-        map.put("description",rs.getObject("description"));
+        map.put("id", rs.getObject("id"));
+        map.put("description", rs.getObject("description"));
         map.put("create_time", rs.getTimestamp("create_time"));
         return map;
     }
-
-
 
 
 }

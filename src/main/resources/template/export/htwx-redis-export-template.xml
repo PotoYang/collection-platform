@@ -22,8 +22,8 @@
 
     <!-- 发送到告警消息队列 -->
     <export id="12007" dataType="htwx_alarm" enable="true">
-        <key value="notificationStackCache:htwx_alarm_msg" />
-        <option type="lpush" />
+        <key value="notificationStackCache:htwx_alarm_msg"/>
+        <option type="lpush"/>
     </export>
 
     <export id="12008" dataType="htwx_gps" enable="true">
@@ -47,10 +47,10 @@
         </option>
     </export>
     <export id="12011" dataType="htwx_fault" enable="true">
-        <key value="htwx_fault_code_msg" />
-        <option type="lpush" />
+        <key value="htwx_fault_code_msg"/>
+        <option type="lpush"/>
     </export>
-    
+
     <export id="12012" dataType="htwx_snap" enable="true">
         <key value="htwx_snap_{device_id}"/>
         <option type="zadd">

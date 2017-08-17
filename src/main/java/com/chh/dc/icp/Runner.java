@@ -25,7 +25,7 @@ public class Runner {
         log.info("采集服务平台启动加载");
         applicationContext = SpringApplication.run(Runner.class, args);
         log.info("Spring注入完毕");
-        TaskManager taskManager = (TaskManager)applicationContext.getBean("taskManager", TaskManager.class);
+        TaskManager taskManager = (TaskManager) applicationContext.getBean("taskManager", TaskManager.class);
         try {
             taskManager.start();
             log.info("采集服务平台启动完毕");

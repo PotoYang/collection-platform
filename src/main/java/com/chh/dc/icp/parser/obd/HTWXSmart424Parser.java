@@ -37,8 +37,9 @@ public class HTWXSmart424Parser extends AbstractParser {
         readerMap.put("4006", new FaultReader());
         readerMap.put("4007", new AlarmReader());
     }
-    public void init(){
-    	//加载所需数据
+
+    public void init() {
+        //加载所需数据
 //    	OBDAlarmCodeConverter.loadData();
     }
 
@@ -49,7 +50,7 @@ public class HTWXSmart424Parser extends AbstractParser {
         log.info("收取到HTWX数据，判断得到功能类型为{}", featureId);
         ByteArrayReader reader = readerMap.get(featureId);
         if (reader == null) {
-            log.info("又要找到匹配类型为{}的读取器" + featureId);
+            log.info("没有找到{}的读取器" ,featureId);
             return;
         }
         this.list = reader.readRecord(bs);

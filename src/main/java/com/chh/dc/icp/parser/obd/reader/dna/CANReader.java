@@ -156,8 +156,6 @@ public class CANReader extends DNAReader {
     }
 
 
-
-
     protected void readDoorStatus(byte[] bs, int index, Map<String, Object> map) {
         byte status = bs[index];
         map.put("dor_lf_status", readBit(status, 7));

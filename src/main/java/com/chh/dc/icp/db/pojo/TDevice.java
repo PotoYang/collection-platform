@@ -6,62 +6,63 @@ import java.util.Date;
 
 public class TDevice implements java.io.Serializable {
 
-	/**
-	 * 状态：在线
-	 */
-	public static final int STATUS_ONLINE = 1;
-	/**
-	 * 状态：失联
-	 */
-	public static final int STATUS_MISSING = 2;
-	// Fields
+    /**
+     * 状态：在线
+     */
+    public static final int STATUS_ONLINE = 1;
+    /**
+     * 状态：失联
+     */
+    public static final int STATUS_MISSING = 2;
+    // Fields
 
-	/**
-	 * 数据中心设备统一ID
-	 */
-	private String deviceUid;
-//	private Long companyId;
-	private String sn;
+    /**
+     * 数据中心设备统一ID
+     */
+    private String deviceUid;
+    //	private Long companyId;
+    private String sn;
 //	private String deviceType;
 
 
-	/**
-	 * 厂家设备ID
-	 */
-	private String vender_device_uid;
-	private Integer status;
-//	private Timestamp serviceStartTime;
+    /**
+     * 厂家设备ID
+     */
+    private String vender_device_uid;
+    private Integer status;
+    //	private Timestamp serviceStartTime;
 //	private Timestamp createTime;
 //	private Timestamp updateTime;
 //	private Timestamp serviceEndTime;
 //	private Date lastDfdataDate;
-	private Timestamp lastTripEndTime;
+    private Timestamp lastTripEndTime;
 //	private String password;
-	
-	// Constructors
 
-	/** default constructor */
-	public TDevice() {
-	}
+    // Constructors
 
-
-
-	public String getDeviceUid() {
-		return this.deviceUid;
-	}
-
-	public void setDeviceUid(String deviceUid) {
-		this.deviceUid = deviceUid;
-	}
+    /**
+     * default constructor
+     */
+    public TDevice() {
+    }
 
 
-	public String getSn() {
-		return this.sn;
-	}
+    public String getDeviceUid() {
+        return this.deviceUid;
+    }
 
-	public void setSn(String sn) {
-		this.sn = sn;
-	}
+    public void setDeviceUid(String deviceUid) {
+        this.deviceUid = deviceUid;
+    }
+
+
+    public String getSn() {
+        return this.sn;
+    }
+
+    public void setSn(String sn) {
+        this.sn = sn;
+    }
 //
 //	public String getDeviceType() {
 //		return this.deviceType;
@@ -71,21 +72,21 @@ public class TDevice implements java.io.Serializable {
 //		this.deviceType = deviceType;
 //	}
 
-	public String getVender_device_uid() {
-		return this.vender_device_uid;
-	}
+    public String getVender_device_uid() {
+        return this.vender_device_uid;
+    }
 
-	public void setVender_device_uid(String vender_device_uid) {
-		this.vender_device_uid = vender_device_uid;
-	}
+    public void setVender_device_uid(String vender_device_uid) {
+        this.vender_device_uid = vender_device_uid;
+    }
 
-	public Integer getStatus() {
-		return this.status;
-	}
+    public Integer getStatus() {
+        return this.status;
+    }
 
-	public void setStatus(Integer status) {
-		this.status = status;
-	}
+    public void setStatus(Integer status) {
+        this.status = status;
+    }
 
 //	public Timestamp getServiceStartTime() {
 //		return this.serviceStartTime;
@@ -128,13 +129,13 @@ public class TDevice implements java.io.Serializable {
 //	}
 
 
-	public Timestamp getLastTripEndTime() {
-		return this.lastTripEndTime;
-	}
+    public Timestamp getLastTripEndTime() {
+        return this.lastTripEndTime;
+    }
 
-	public void setLastTripEndTime(Timestamp lastTripEndTime) {
-		this.lastTripEndTime = lastTripEndTime;
-	}
+    public void setLastTripEndTime(Timestamp lastTripEndTime) {
+        this.lastTripEndTime = lastTripEndTime;
+    }
 
 
 //	public String getPassword() {
@@ -144,7 +145,6 @@ public class TDevice implements java.io.Serializable {
 //	public void setPassword(String password) {
 //		this.password = password;
 //	}
-
 
 
 //	public Long getCompanyId() {
@@ -157,5 +157,5 @@ public class TDevice implements java.io.Serializable {
 //		this.companyId = companyId;
 //	}
 
-	
+
 }

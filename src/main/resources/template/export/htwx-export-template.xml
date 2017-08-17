@@ -209,7 +209,7 @@
             <column name="alarm_threshold"/>
         </columns>
     </export>
-    
+
     <export id="12006" type="jdbc_batch" dataType="htwx_snap" batchNumber="100" target="exportTarger" enable="true">
         <table name="t_htwx_snap"/>
         <columns>

@@ -6,13 +6,13 @@ import com.chh.dc.icp.accessor.model.GoloTripRecordByPage.TripRecordItem;
 
 public class GoloResp {
 
-	private int code;
-	
-	private String msg;
-	
-	private Object data;
-	
-	private Integer type;
+    private int code;
+
+    private String msg;
+
+    private Object data;
+
+    private Integer type;
 
 //    /**
 //     * 数据中心设备统一ID
@@ -23,48 +23,48 @@ public class GoloResp {
      */
     private TDevice device;
 
-	/**
-	 * 当前数据对应的行程数据
-	 */
-	private TripRecordItem trip;
+    /**
+     * 当前数据对应的行程数据
+     */
+    private TripRecordItem trip;
 
 
-	public int getCode() {
-		return code;
-	}
+    public int getCode() {
+        return code;
+    }
 
-	public void setCode(int code) {
-		this.code = code;
-	}
+    public void setCode(int code) {
+        this.code = code;
+    }
 
-	public String getMsg() {
-		return msg;
-	}
+    public String getMsg() {
+        return msg;
+    }
 
-	public void setMsg(String msg) {
-		this.msg = msg;
-	}
+    public void setMsg(String msg) {
+        this.msg = msg;
+    }
 
-	public Object getData() {
-		return data;
-	}
+    public Object getData() {
+        return data;
+    }
 
-	public void setData(String data) {
-		try {
-			this.data = JSON.parse(data);
-		} catch (Exception e) {
-			this.data = null;
-		}
+    public void setData(String data) {
+        try {
+            this.data = JSON.parse(data);
+        } catch (Exception e) {
+            this.data = null;
+        }
 //		this.data = data;
-	}
+    }
 
-	public Integer getType() {
-		return type;
-	}
+    public Integer getType() {
+        return type;
+    }
 
-	public void setType(Integer type) {
-		this.type = type;
-	}
+    public void setType(Integer type) {
+        this.type = type;
+    }
 
 //	public Long getDeviceUid() {
 //		return deviceUid;
@@ -75,13 +75,13 @@ public class GoloResp {
 //	}
 
 
-	public TripRecordItem getTrip() {
-		return trip;
-	}
+    public TripRecordItem getTrip() {
+        return trip;
+    }
 
-	public void setTrip(TripRecordItem trip) {
-		this.trip = trip;
-	}
+    public void setTrip(TripRecordItem trip) {
+        this.trip = trip;
+    }
 
     public TDevice getDevice() {
         return device;

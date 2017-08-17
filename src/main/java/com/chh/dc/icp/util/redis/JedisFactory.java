@@ -18,10 +18,14 @@ public class JedisFactory {
 
     private int port;
 
-    /** 链接到redis server超时 */
+    /**
+     * 链接到redis server超时
+     */
     private int timeout = 10;
 
-    /** 获取instance最大等待时间，如果超过则创建新的instance或throw exception */
+    /**
+     * 获取instance最大等待时间，如果超过则创建新的instance或throw exception
+     */
     private long maxWaitMills;
 
     private int maxTotal;
@@ -30,7 +34,7 @@ public class JedisFactory {
 
     private String password;
 
-    private int  maxActive;
+    private int maxActive;
 
     private int leftMaxTime;
 
@@ -40,7 +44,7 @@ public class JedisFactory {
 
     }
 
-    public JedisFactory( String host, int port, int timeout, long maxWaitMills, int maxTotal, int maxIdle, String password,int maxActive,int leftMaxTime,boolean enRedisable) {
+    public JedisFactory(String host, int port, int timeout, long maxWaitMills, int maxTotal, int maxIdle, String password, int maxActive, int leftMaxTime, boolean enRedisable) {
         this.host = host;
         this.port = port;
         this.timeout = timeout;
@@ -48,9 +52,9 @@ public class JedisFactory {
         this.maxTotal = maxTotal;
         this.maxIdle = maxIdle;
         this.password = password;
-        this.maxActive=maxActive;
-        this.leftMaxTime=leftMaxTime;
-        this.enRedisable=enRedisable;
+        this.maxActive = maxActive;
+        this.leftMaxTime = leftMaxTime;
+        this.enRedisable = enRedisable;
     }
 
     public Jedis getJedis() {
@@ -60,7 +64,7 @@ public class JedisFactory {
         return pool.getResource();
     }
 
-    public static Jedis createJedis( String host, int port, int timeout,String password) {
+    public static Jedis createJedis(String host, int port, int timeout, String password) {
         JedisShardInfo info = new JedisShardInfo(host, port);
         info.setConnectionTimeout(timeout);
         if (StringUtil.isNotNull(password)) {

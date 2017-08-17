@@ -21,7 +21,7 @@ public class RedisStackAccessor extends AbstractAccessor {
     public boolean access() {
         jedis = JedisFactory.createJedis(taskInfo.getHostAddr(), taskInfo.getPort(), taskInfo.getCollectTimeoutSec(), taskInfo.getPassword());
         stackName = taskInfo.getCollectPath().getBytes();
-        log.info("接入Redis[{}:{}][{}],timeout:{},password:{}",taskInfo.getHostAddr(), taskInfo.getPort(), taskInfo.getCollectPath(),taskInfo.getCollectTimeoutSec(), StringUtil.isNull(taskInfo.getPassword())?null:taskInfo.getPassword().replaceAll("/*","*"));
+        log.info("接入Redis[{}:{}][{}],timeout:{},password:{}", taskInfo.getHostAddr(), taskInfo.getPort(), taskInfo.getCollectPath(), taskInfo.getCollectTimeoutSec(), StringUtil.isNull(taskInfo.getPassword()) ? null : taskInfo.getPassword().replaceAll("/*", "*"));
         return true;
     }
 

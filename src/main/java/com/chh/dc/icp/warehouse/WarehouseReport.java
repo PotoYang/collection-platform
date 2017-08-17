@@ -23,22 +23,22 @@ public class WarehouseReport {
     private long total;
 
     /**
-     *  成功条数
+     * 成功条数
      */
     private long succ;
 
     /**
-     *  失败条数
+     * 失败条数
      */
     private long fail;
 
     /**
-     *  分发至输出模块记录条数 多个数据类型用;隔开
+     * 分发至输出模块记录条数 多个数据类型用;隔开
      */
     private String distributedNum;
 
     /**
-     *  失败原因
+     * 失败原因
      */
     private String cause;
 
@@ -110,7 +110,7 @@ public class WarehouseReport {
     }
 
 
-    public static class TableReport{
+    public static class TableReport {
         /**
          * 开始时间
          */
@@ -127,22 +127,22 @@ public class WarehouseReport {
         private long total;
 
         /**
-         *  成功条数
+         * 成功条数
          */
         private long succ;
 
         /**
-         *  失败条数
+         * 失败条数
          */
         private long fail;
 
         /**
-         *  分发至输出模块记录条数 多个数据类型用;隔开
+         * 分发至输出模块记录条数 多个数据类型用;隔开
          */
         private String distributedNum;
 
         /**
-         *  失败原因
+         * 失败原因
          */
         private String cause;
 

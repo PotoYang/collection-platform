@@ -37,7 +37,7 @@ import java.util.concurrent.Callable;
  * @date: 2016-6-27
  * @since 1.0
  */
-public abstract class AbstractExecutor implements Callable<TaskFuture>{
+public abstract class AbstractExecutor implements Callable<TaskFuture> {
 
     private static Logger LOG = LoggerFactory.getLogger(AbstractExecutor.class);
     /**
@@ -173,9 +173,11 @@ public abstract class AbstractExecutor implements Callable<TaskFuture>{
     /**
      * 停止执行器，主要包括停止访问器，停止解析器，停止输出器
      */
-    public void stop(){
+    public void stop() {
 
-    };
+    }
+
+    ;
 
 
     /**
