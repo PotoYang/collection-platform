@@ -35,6 +35,9 @@ public class JDBCTaskLoader extends TaskLoader {
 
     }
 
+    /**
+     * 每隔一段时间从数据库加载数据(任务)
+     */
     @Override
     public void loadTask() {
         LOG.info("数据库任务加载器启动，任务加载周期为:" + loadPeriodMin + "分钟");
