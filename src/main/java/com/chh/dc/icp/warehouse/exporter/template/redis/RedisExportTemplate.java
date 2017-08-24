@@ -18,10 +18,8 @@ public class RedisExportTemplate extends ExportTemplate {
     private OptionTemplate optionTemplate;
 
 
-
     public RedisExportTemplate() {
     }
-
 
 
     public String getKey() {

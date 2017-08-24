@@ -8,15 +8,15 @@ import com.chh.dc.icp.db.pojo.TaskInfo;
  * 1、创建访问器对象<br>
  * 2、调用access方法，如果返回false，则结束访问<br>
  * 3、返回true，则应该循环调用getData方法获取数据源DataPackage<br>
- * 4、因为访问器一次可能返回多个数据源，所以需要循环调用getData方法，直到返回null
+ * 4、应为访问器一次可能返回多个数据源，所以需要循环调用getData方法，知道返回null
  *
- * @ClassName: AbstractAccessor
- * @since 1.0
- * @version 1.0
  * @author Niow
+ * @version 1.0
+ * @ClassName: AbstractAccessor
  * @date: 2016-6-27
+ * @since 1.0
  */
-public abstract class AbstractAccessor{
+public abstract class AbstractAccessor {
 
     protected String logHead;
 
@@ -26,6 +26,7 @@ public abstract class AbstractAccessor{
 
     /**
      * 获取数据源
+     *
      * @return
      */
     public abstract DataPackage getData();
@@ -35,28 +36,28 @@ public abstract class AbstractAccessor{
     /**
      * @return the taskInfo
      */
-    public TaskInfo getTaskInfo(){
+    public TaskInfo getTaskInfo() {
         return taskInfo;
     }
 
     /**
      * @param taskInfo the taskInfo to set
      */
-    public void setTaskInfo(TaskInfo taskInfo){
+    public void setTaskInfo(TaskInfo taskInfo) {
         this.taskInfo = taskInfo;
     }
 
     /**
      * @return the logHead
      */
-    public String getLogHead(){
+    public String getLogHead() {
         return logHead;
     }
 
     /**
      * @param logHead the logHead to set
      */
-    public void setLogHead(String logHead){
+    public void setLogHead(String logHead) {
         this.logHead = logHead;
     }
 

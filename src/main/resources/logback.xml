@@ -30,20 +30,20 @@
         </encoder>
     </appender>
 
-  <appender name="httpclientLog" class="ch.qos.logback.core.rolling.RollingFileAppender">
-    <!--See http://logback.qos.ch/manual/appenders.html#RollingFileAppender-->
-    <!--and http://logback.qos.ch/manual/appenders.html#TimeBasedRollingPolicy-->
-    <!--for further documentation-->
-    <File>${LOG_HOME}/httpclient.log</File>
-    <encoder>
-      <pattern>[%d{yyyy-MM-dd HH:mm:ss,SSS}]%m%n</pattern>
-    </encoder>
-    <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-      <fileNamePattern>${LOG_HOME}/log4data.log.%d{yyyy-MM-dd }</fileNamePattern>
-    </rollingPolicy>
-  </appender>
+    <appender name="httpclientLog" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <!--See http://logback.qos.ch/manual/appenders.html#RollingFileAppender-->
+        <!--and http://logback.qos.ch/manual/appenders.html#TimeBasedRollingPolicy-->
+        <!--for further documentation-->
+        <File>${LOG_HOME}/httpclient.log</File>
+        <encoder>
+            <pattern>[%d{yyyy-MM-dd HH:mm:ss,SSS}]%m%n</pattern>
+        </encoder>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${LOG_HOME}/log4data.log.%d{yyyy-MM-dd }</fileNamePattern>
+        </rollingPolicy>
+    </appender>
 
-    <logger name="com.tcl" level="debug" />
+    <logger name="com.tcl" level="debug"/>
 
     <!-- 日志输出级别 -->
     <root level="info">

@@ -30,13 +30,13 @@ public class GSensorReader extends HTWXReader {
         int collectInterval = readU16(bs, index, true);
         index += 2;
         int groupCount = readU8(bs, index);
-        for(int i = 0; i <groupCount; i++) {
+        for (int i = 0; i < groupCount; i++) {
 
         }
         return null;
     }
 
-    protected int readGSensorData(byte[] bs, Map<String, Object> map,int start) {
+    protected int readGSensorData(byte[] bs, Map<String, Object> map, int start) {
         int index = start;
 //        map.put("")
         return index;

@@ -34,7 +34,7 @@
     <export id="10002" type="jdbc_batch" dataType="dna_can" batchNumber="100" target="exportTarger" enable="true">
         <table name="t_dna_can"/>
         <columns>
-            <column name="id" />
+            <column name="id"/>
             <column name="time_stamp"/>
             <column name="acc_status"/>
             <column name="security_status"/>

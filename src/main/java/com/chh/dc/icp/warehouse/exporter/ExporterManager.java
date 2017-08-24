@@ -14,14 +14,13 @@ import java.util.concurrent.*;
  * 输出器管理<br>
  * 每个Repository都有一个自己的ExporterManager<br/>
  *
- *
- * @ClassName: ExporterManager
- * @since 1.0
- * @version 1.0
  * @author Niow
+ * @version 1.0
+ * @ClassName: ExporterManager
  * @date: 2016-6-27
+ * @since 1.0
  */
-public class ExporterManager extends Thread{
+public class ExporterManager extends Thread {
 
     private static final Logger log = LoggerFactory.getLogger(ExporterManager.class);
 
@@ -56,21 +55,21 @@ public class ExporterManager extends Thread{
     void createExporters() throws Exception {
         String templateName = taskInfo.getExporterTemplate();
         List<String> templateFiles = new ArrayList<String>();
-        if(templateName.contains(";")){
+        if (templateName.contains(";")) {
             String[] split = templateName.split(";");
             templateFiles.addAll(Arrays.asList(split));
-        }else{
+        } else {
             templateFiles.add(templateName);
         }
         try {
             exportTemplets = TemplateLoader.loadTemplate(templateFiles);
         } catch (Exception e) {
-            log.error("加载输出模板出错",e);
+            log.error("加载输出模板出错", e);
             return;
         }
         for (ExportTemplate template : exportTemplets) {
             String dataType = template.getDataType();
-            Exporter exporter = ExporterFactory.createExporter(taskInfo,template);
+            Exporter exporter = ExporterFactory.createExporter(taskInfo, template);
             if (exporter != null) {
                 exporter.setDataType(dataType);
                 // List 中增加Exporter的一个引用，方便进行迭代和输出,以及线程池调用Exporter
@@ -83,7 +82,7 @@ public class ExporterManager extends Thread{
                 dataThreadCounter.put(dataType, dataExporterNum + 1);
             }
             if (exporter.getDataType() == null) {
-                System.out.println(exporter.getExportId()+"!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"+template.getType());
+                System.out.println(exporter.getExportId() + "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!" + template.getType());
             }
         }
     }
@@ -124,7 +123,6 @@ public class ExporterManager extends Thread{
         // 输出完毕后关闭线程池
         shutdown();
     }
-
 
 
     /**

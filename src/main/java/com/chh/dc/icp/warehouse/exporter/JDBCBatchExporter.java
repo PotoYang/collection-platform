@@ -130,7 +130,7 @@ public class JDBCBatchExporter extends AbstractBufferedExporter {
             if (batchNum <= 0 || batchNum > 10000) {
                 batchNum = DEFAULT_BATCH_NUM;
             }
-            log.debug("exportId：{},每次批量入库条数为：{}", new Object[]{dbExportTemplate.getId(),batchNum});
+            log.debug("exportId：{},每次批量入库条数为：{}", new Object[]{dbExportTemplate.getId(), batchNum});
             this.statement = con.prepareStatement(this.sql);
             currNum = 0;
         } catch (Exception e) {
@@ -139,19 +139,19 @@ public class JDBCBatchExporter extends AbstractBufferedExporter {
             this.errorCode = -1;
             this.cause = e.getMessage();
 //            log.error("exportId：{},数据入库时，数据库连接创建失败。",dbExportTemplate.getId(), e);
-            throw new Exception("exportId："+dbExportTemplate.getId()+",数据入库时，数据库连接创建失败。",e);
+            throw new Exception("exportId：" + dbExportTemplate.getId() + ",数据入库时，数据库连接创建失败。", e);
         }
     }
 
     protected void checkConnection() throws Exception {
-       if (!accessAble()) {
-           initJdbc();
-       }
+        if (!accessAble()) {
+            initJdbc();
+        }
     }
 
-    protected boolean accessAble(){
+    protected boolean accessAble() {
         try {
-            if (statement == null || statement.isClosed()||con==null||con.isClosed()||con.isReadOnly()){
+            if (statement == null || statement.isClosed() || con == null || con.isClosed() || con.isReadOnly()) {
                 return false;
             }
             return true;
@@ -247,7 +247,7 @@ public class JDBCBatchExporter extends AbstractBufferedExporter {
             String errSql = buildErrRecordSql(record);
             // 主键冲突
             if (e instanceof SQLException && e.getMessage().indexOf("ORA-00001") >= 0) {
-                log.error("exportId：{},主键冲突：{}", dbExportTemplate.getId(),errSql);
+                log.error("exportId：{},主键冲突：{}", dbExportTemplate.getId(), errSql);
                 // ++this.fail;
                 // --this.succ;
                 // return;
@@ -260,7 +260,7 @@ public class JDBCBatchExporter extends AbstractBufferedExporter {
 //            this.currNum=0;
             updateFailNum(e);
             DBUtil.close(null, statement, con);
-            throw new Exception("写入数据库失败：" + table+",失败条数："+currNum, e);
+            throw new Exception("写入数据库失败：" + table + ",失败条数：" + currNum, e);
         }
     }
 
@@ -584,15 +584,15 @@ public class JDBCBatchExporter extends AbstractBufferedExporter {
         return this.lastSQLException;
     }
 
-    private void updateSuccNum(){
-        log.info("exportId：{}，提交了类型为{}的数据{}条", dbExportTemplate.getId(),dataType, this.currNum);
+    private void updateSuccNum() {
+        log.info("exportId：{}，提交了类型为{}的数据{}条", dbExportTemplate.getId(), dataType, this.currNum);
         this.succ += currNum;
-        this.currNum=0;
+        this.currNum = 0;
     }
 
-    private void updateFailNum(Exception e){
-        log.error("exportId：{}，{}条数据提交失败", dbExportTemplate.getId(),currNum,e);
+    private void updateFailNum(Exception e) {
+        log.error("exportId：{}，{}条数据提交失败", dbExportTemplate.getId(), currNum, e);
         this.fail += currNum;
-        this.currNum=0;
+        this.currNum = 0;
     }
 }

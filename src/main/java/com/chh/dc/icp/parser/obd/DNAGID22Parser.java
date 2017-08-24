@@ -5,7 +5,6 @@ import com.chh.dc.icp.db.pojo.TaskInfo;
 import com.chh.dc.icp.parser.AbstractParser;
 import com.chh.dc.icp.parser.obd.reader.ByteArrayReader;
 import com.chh.dc.icp.parser.obd.reader.dna.*;
-//import com.tcl.paas.icp.parser.obd.reader.dna.*;
 import com.chh.dc.icp.warehouse.ParsedRecord;
 
 import java.util.HashMap;

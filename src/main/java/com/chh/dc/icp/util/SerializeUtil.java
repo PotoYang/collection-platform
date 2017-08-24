@@ -8,7 +8,7 @@ import java.io.ObjectOutputStream;
 public class SerializeUtil {
     /**
      * 序列化
-     * 
+     *
      * @param object
      * @return
      */
@@ -33,7 +33,7 @@ public class SerializeUtil {
 
     /**
      * 反序列化
-     * 
+     *
      * @param bytes
      * @return
      */

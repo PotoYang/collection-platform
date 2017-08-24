@@ -12,23 +12,24 @@ public class ExporterFactory {
         if (template.getType() == null || template.getType().trim().equals("")) {
             throw new IllegalArgumentException("模板中输出器类型不存在");
         }
-        switch (template.getType()){
-            case Exporter.TYPE_JDBC_POOL_FAULT_TOLERANT:{
+        switch (template.getType()) {
+            case Exporter.TYPE_JDBC_POOL_FAULT_TOLERANT: {
                 //Exporter exporter = new JDBCPoolExExporter(template,taskInfo);
                 return null;
             }
-            case Exporter.TYPE_JDBC_POOL:{
+            case Exporter.TYPE_JDBC_POOL: {
                 return null;
             }
-            case Exporter.TYPE_JDBC_BATCH:{
-                Exporter exporter = new JDBCBatchExporter(template,taskInfo);
+            case Exporter.TYPE_JDBC_BATCH: {
+                Exporter exporter = new JDBCBatchExporter(template, taskInfo);
                 return exporter;
             }
-            case Exporter.TYPE_REDIS:{
+            case Exporter.TYPE_REDIS: {
                 Exporter exporter = new RedisExporter(template, taskInfo);
                 return exporter;
             }
-            default:return null;
+            default:
+                return null;
         }
     }
 }

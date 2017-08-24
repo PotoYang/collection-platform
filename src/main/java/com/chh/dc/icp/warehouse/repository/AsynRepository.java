@@ -31,7 +31,7 @@ public class AsynRepository implements Repository {
 
     private long id; // 仓库ID
 
-    private Map<String, List<ParsedRecord>> tempRegisters = new ConcurrentHashMap<String, List<ParsedRecord>>();
+    private Map<String, List<ParsedRecord>> tempRegisters = new ConcurrentHashMap<>();
 
     private List<Exporter> exports;
 
@@ -107,7 +107,7 @@ public class AsynRepository implements Repository {
         dataList = tempRegisters.get(dataType);
         // 如果dataList没有进行初始化 则先初始化
         if (dataList == null) {
-            dataList = new ArrayList<ParsedRecord>(REGITSTER_SIZE);
+            dataList = new ArrayList<>(REGITSTER_SIZE);
             dataList.add(parsedRecord);
             tempRegisters.put(dataType, dataList);
             return 1;
@@ -185,15 +185,15 @@ public class AsynRepository implements Repository {
          *  		但当exceptionFlg为true时，就continue了。
          *  </pre>
          */
-//        while (!distributedFlag && this.distributeThread != null) {
-//            ThreadUtil.sleep(500);
-//        }
-//        for (Exporter export : this.exports) {
-//            // 只需要关闭没有报错的Exporter。报错的Exporter自动会关闭
-//            if (!errorExporters.containsKey(export.getExportId())) {
-//                export.commit();
-//            }
-//        }
+        while (!distributedFlag && this.distributeThread != null) {
+            ThreadUtil.sleep(500);
+        }
+        for (Exporter export : this.exports) {
+            // 只需要关闭没有报错的Exporter。报错的Exporter自动会关闭
+            if (!errorExporters.containsKey(export.getExportId())) {
+                export.commit();
+            }
+        }
     }
 
     @Override
@@ -359,8 +359,8 @@ public class AsynRepository implements Repository {
                         continue;
                     }
                     log.debug("提交数据类型为{}的缓存", entry.getKey());
-                    tempRegisters.put(entry.getKey(), new ArrayList<ParsedRecord>());
-                    DataBlock dataBlock = new DataBlock(entry.getValue(), entry.getKey());
+                    tempRegisters.put(entry.getKey(), new ArrayList<>());
+                    DataBlock dataBlock = new DataBlock(dataList, entry.getKey());
                     addQueue(dataBlock);
                 }
                 for (Exporter export : exports) {

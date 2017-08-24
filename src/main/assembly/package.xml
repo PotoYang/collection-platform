@@ -31,11 +31,11 @@
 
         <!-- 把项目的脚本文件（除了启动脚本文件），打包进zip文件的script目录 -->
         <!--<fileSet>-->
-            <!--<directory>${project.build.scriptSourceDirectory}</directory>-->
-            <!--<outputDirectory></outputDirectory>-->
-            <!--<includes>-->
-                <!--<exclude>startup.*</exclude>-->
-            <!--</includes>-->
+        <!--<directory>${project.build.scriptSourceDirectory}</directory>-->
+        <!--<outputDirectory></outputDirectory>-->
+        <!--<includes>-->
+        <!--<exclude>startup.*</exclude>-->
+        <!--</includes>-->
         <!--</fileSet>-->
 
         <!-- 把项目自己编译出来的jar文件，打包进zip文件的根目录 -->

@@ -8,7 +8,7 @@
 <!-- timeout: 数据缓存有效期（秒）-->
 
 <templates type="redis" target="test_redis">
-	<!-- 实时GPS数据 -->
+    <!-- 实时GPS数据 -->
     <export id="12001" dataType="htwx_gps" enable="true">
         <key value="htwx_gps:{device_uid}|{last_accon_time_sec}"/>
         <option type="zadd">
@@ -23,14 +23,14 @@
             <output value="last_accon_time_sec"/>
         </option>
     </export>
-   	
+
     <export id="12003" dataType="htwx_gps" enable="true">
         <key value="lastGpsCache"/>
         <option type="hash">
             <field value="device_uid"/>
         </option>
     </export>
-    
+
     <!--  历史GPS数据 -->
     <export id="12004" dataType="htwx_gps_his" enable="true">
         <key value="htwx_gps:{device_uid}|{last_accon_time_sec}"/>
@@ -49,27 +49,27 @@
     <!-- 行程故障码 -->
     <export id="12006" dataType="htwx_fault" enable="true">
         <key value="htwx_fault_code:{device_uid}|{last_accon_time_sec}"/>
-        <option type="lpush" />
+        <option type="lpush"/>
     </export>
-   	<!--  待汇总告警数据 -->
-   	<export id="12007" dataType="htwx_warning_to_stat" enable="true">
+    <!--  待汇总告警数据 -->
+    <export id="12007" dataType="htwx_warning_to_stat" enable="true">
         <key value="notificationStackCache:htwx_warning_msg"/>
-        <option type="lpush" />
+        <option type="lpush"/>
     </export>
     <!-- 行程告警数据 修改 htwx_alarm 为 device_warning -->
     <export id="12008" dataType="device_warning" enable="true">
         <key value="htwx_alarm:{device_uid}|{last_accon_time_sec}"/>
-        <option type="lpush" />
+        <option type="lpush"/>
     </export>
     <!-- 告警推送队列缓存 -->
     <export id="12009" dataType="device_warning" enable="true">
         <key value="obd_data_warning_queue"/>
-        <option type="lpush" />
+        <option type="lpush"/>
     </export>
     <!-- 快照数据 -->
     <export id="12010" dataType="htwx_snap" enable="true">
         <key value="htwx_snap:{device_uid}|{last_accon_time_sec}"/>
-        <option type="lpush" />
+        <option type="lpush"/>
     </export>
 
 </templates>

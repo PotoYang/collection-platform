@@ -15,7 +15,7 @@
 <!--             property:数据字段名  -->
 <!--             format:数据为字符串时间格式  -->
 <templates>
-	<!-- 实时GPS数据 -->
+    <!-- 实时GPS数据 -->
     <export id="12001" type="jdbc_batch" dataType="htwx_gps" batchNumber="100" target="exportTarger" enable="true">
         <table name="t_htwx_gps"/>
         <columns>
@@ -28,34 +28,33 @@
             <column name="satellites"/>
             <column name="device_id"/>
             <column name="collection_time"/>
-            
             <column name="device_uid"/>
-			<column name="last_accon_time"/>
-			<column name="total_trip_mileage"/>
-			<column name="current_trip_milea"/>
-			<column name="total_fuel"/>
-			<column name="current_fuel"/>
-			<column name="reserve"/>
-			<column name="vstate"/>
-			<column name="gps_locate_model"/>
+            <column name="last_accon_time"/>
+            <column name="total_trip_mileage"/>
+            <column name="current_trip_milea"/>
+            <column name="total_fuel"/>
+            <column name="current_fuel"/>
+            <column name="reserve"/>
+            <column name="vstate"/>
+            <column name="gps_locate_model"/>
         </columns>
     </export>
-	<export id="12002" type="jdbc_batch" dataType="htwx_gps" batchNumber="100" target="exportTarger" enable="true">
+    <export id="12002" type="jdbc_batch" dataType="htwx_gps" batchNumber="100" target="exportTarger" enable="true">
         <table name="t_device_gps"/>
         <columns>
             <column name="device_uid"/>
-			<column name="gps_time" property="utctime"/>
-			<column name="longitude" property="lon"/>
-			<column name="latitude" property="lat"/>
-			<column name="gps_locate_model"/>
-			<column name="create_time" property="collection_time"/>
-			<column name="speed"/>
-			<column name="dir"/>
-			<column name="is_located" property="isLocated"/>
+            <column name="gps_time" property="utctime"/>
+            <column name="longitude" property="lon"/>
+            <column name="latitude" property="lat"/>
+            <column name="gps_locate_model"/>
+            <column name="create_time" property="collection_time"/>
+            <column name="speed"/>
+            <column name="dir"/>
+            <column name="is_located" property="isLocated"/>
         </columns>
     </export>
-	<!--  历史GPS数据 -->
-	<export id="12003" type="jdbc_batch" dataType="htwx_gps_his" batchNumber="100" target="exportTarger" enable="true">
+    <!--  历史GPS数据 -->
+    <export id="12003" type="jdbc_batch" dataType="htwx_gps_his" batchNumber="100" target="exportTarger" enable="true">
         <table name="t_htwx_gps"/>
         <columns>
             <column name="utctime"/>
@@ -67,30 +66,29 @@
             <column name="satellites"/>
             <column name="device_id"/>
             <column name="collection_time"/>
-            
             <column name="device_uid"/>
-			<column name="last_accon_time"/>
-			<column name="total_trip_mileage"/>
-			<column name="current_trip_milea"/>
-			<column name="total_fuel"/>
-			<column name="current_fuel"/>
-			<column name="reserve"/>
-			<column name="vstate"/>
-			<column name="gps_locate_model"/>
+            <column name="last_accon_time"/>
+            <column name="total_trip_mileage"/>
+            <column name="current_trip_milea"/>
+            <column name="total_fuel"/>
+            <column name="current_fuel"/>
+            <column name="reserve"/>
+            <column name="vstate"/>
+            <column name="gps_locate_model"/>
         </columns>
     </export>
-	<export id="12004" type="jdbc_batch" dataType="htwx_gps_his" batchNumber="100" target="exportTarger" enable="true">
+    <export id="12004" type="jdbc_batch" dataType="htwx_gps_his" batchNumber="100" target="exportTarger" enable="true">
         <table name="t_device_gps"/>
         <columns>
             <column name="device_uid"/>
-			<column name="gps_time" property="gps_time"/>
-			<column name="longitude" property="lon"/>
-			<column name="latitude" property="lat"/>
-			<column name="gps_locate_model"/>
-			<column name="create_time" property="collection_time"/>
-			<column name="speed"/>
-			<column name="dir"/>
-			<column name="is_located" property="isLocated"/>
+            <column name="gps_time" property="gps_time"/>
+            <column name="longitude" property="lon"/>
+            <column name="latitude" property="lat"/>
+            <column name="gps_locate_model"/>
+            <column name="create_time" property="collection_time"/>
+            <column name="speed"/>
+            <column name="dir"/>
+            <column name="is_located" property="isLocated"/>
         </columns>
     </export>
     <!-- 故障码数据 -->
@@ -118,7 +116,7 @@
             <column name="device_uid"/>
         </columns>
     </export>
-    
+
     <export id="12007" type="jdbc_batch" dataType="htwx_alarm" batchNumber="100" target="exportTarger" enable="true">
         <table name="t_htwx_alarm"/>
         <columns>
@@ -129,26 +127,27 @@
             <column name="alarm_type"/>
             <column name="alarm_desc"/>
             <column name="alarm_threshold"/>
-            
+
             <column name="device_uid"/>
-			<column name="last_accon_time"/>
-			<column name="lat" property="latitude"/>
-			<column name="lon" property="longitude"/>
+            <column name="last_accon_time"/>
+            <column name="lat" property="latitude"/>
+            <column name="lon" property="longitude"/>
         </columns>
     </export>
-    <export id="12008" type="jdbc_batch" dataType="device_warning" batchNumber="100" target="exportTarger" enable="true">
+    <export id="12008" type="jdbc_batch" dataType="device_warning" batchNumber="100" target="exportTarger"
+            enable="true">
         <table name="t_device_warning"/>
         <columns>
-        	<column name="id"/>
-        	<column name="device_uid"/>
-			<column name="warning_type"/>
-			<column name="warning_desc"/>
-			<column name="warning_time"/>
-			<column name="warning_value"/>
-			<column name="create_time" property="collection_time"/>
-			<column name="longitude"/>
-			<column name="latitude"/>
-			<column name="gps_locate_model"/>
+            <column name="id"/>
+            <column name="device_uid"/>
+            <column name="warning_type"/>
+            <column name="warning_desc"/>
+            <column name="warning_time"/>
+            <column name="warning_value"/>
+            <column name="create_time" property="collection_time"/>
+            <column name="longitude"/>
+            <column name="latitude"/>
+            <column name="gps_locate_model"/>
         </columns>
     </export>
     <export id="12006" type="jdbc_batch" dataType="htwx_snap" batchNumber="100" target="exportTarger" enable="true">
@@ -157,7 +156,7 @@
             <column name="device_id"/>
             <column name="utctime"/>
             <column name="device_uid"/>
-			<column name="last_accon_time"/>
+            <column name="last_accon_time"/>
             <column name="collection_time"/>
             <column name="f_2100"/>
             <column name="f_2101"/>
@@ -261,5 +260,5 @@
             <column name="f_2164"/>
         </columns>
     </export>
-    
+
 </templates>

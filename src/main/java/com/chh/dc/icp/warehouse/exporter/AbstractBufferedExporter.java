@@ -70,7 +70,7 @@ public abstract class AbstractBufferedExporter extends AbstractExporter {
         }
         // 如果初始化没有失败 则进行输出
         //终止处理==true&&缓存区没有数据才能退出
-        while (!(breakProcessFlag&&dataBlockBuffer.size()==0)) {
+        while (!(breakProcessFlag && dataBlockBuffer.size() == 0)) {
             try {
                 exportLock.lockInterruptibly();
                 while (dataBlockBuffer.size() == 0) {

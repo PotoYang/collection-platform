@@ -16,14 +16,15 @@
 <!--             format:数据为字符串时间格式  -->
 <templates>
     <!-- 体检报告 -->
-	<export id="11001" type="jdbc_batch" dataType="yz_medical_report" batchNumber="100" target="exportTarger" enable="true">
+    <export id="11001" type="jdbc_batch" dataType="yz_medical_report" batchNumber="100" target="exportTarger"
+            enable="true">
         <table name="t_device_medical_report"/>
         <columns>
-            <column name="id" />
-            <column name="device_uid" />
-            <column name="create_time" />
-            <column name="examination_time" />
-            <column name="report_content" />
+            <column name="id"/>
+            <column name="device_uid"/>
+            <column name="create_time"/>
+            <column name="examination_time"/>
+            <column name="report_content"/>
         </columns>
     </export>
 
@@ -31,47 +32,47 @@
         <table name="t_device_gps"/>
         <columns>
             <!--<column name="id" />-->
-            <column name="device_uid" />
-            <column name="gps_time" />
-            <column name="latitude" />
-            <column name="longitude" />
+            <column name="device_uid"/>
+            <column name="gps_time"/>
+            <column name="latitude"/>
+            <column name="longitude"/>
             <!--<column name="height" />-->
-            <column name="speed" />
-            <column name="dir" />
-            <column name="create_time" />
+            <column name="speed"/>
+            <column name="dir"/>
+            <column name="create_time"/>
             <!--<column name="accuracy" />-->
-            <column name="gps_locate_model" />
+            <column name="gps_locate_model"/>
         </columns>
-    </export>  
+    </export>
     <export id="11003" type="jdbc_batch" dataType="yz_trip" batchNumber="100" target="exportTarger" enable="true">
         <table name="t_device_trip"/>
         <columns>
-            <column name="id" />
-            <column name="device_uid" />
-            <column name="trip_mileage" />
-            <column name="fuel_consumption" />
-            <column name="start_time" />
-            <column name="end_time" />
-            <column name="create_time" />
-            <column name="gps_locate_model" />
-            <column name="start_longitude" />
-            <column name="start_latitude" />
-            <column name="end_longitude" />
-            <column name="end_latitude" />
-            <column name="ra_count" />
-            <column name="ad_count" />
-            <column name="st_count" />
-            <column name="update_time" />
-            <column name="door_unclosed_cnt" />
-            <column name="idle_cnt" />
-            <column name="temp_barrier_cnt" />
-            <column name="fault_cnt" />
-            <column name="overspeed_cnt" />
-            <column name="over_revs_cnt" />
-            <column name="overdo_cnt" />
-            <column name="score" />
-			<column name="rank_cnt" />
-            <column name="rank_per" />
+            <column name="id"/>
+            <column name="device_uid"/>
+            <column name="trip_mileage"/>
+            <column name="fuel_consumption"/>
+            <column name="start_time"/>
+            <column name="end_time"/>
+            <column name="create_time"/>
+            <column name="gps_locate_model"/>
+            <column name="start_longitude"/>
+            <column name="start_latitude"/>
+            <column name="end_longitude"/>
+            <column name="end_latitude"/>
+            <column name="ra_count"/>
+            <column name="ad_count"/>
+            <column name="st_count"/>
+            <column name="update_time"/>
+            <column name="door_unclosed_cnt"/>
+            <column name="idle_cnt"/>
+            <column name="temp_barrier_cnt"/>
+            <column name="fault_cnt"/>
+            <column name="overspeed_cnt"/>
+            <column name="over_revs_cnt"/>
+            <column name="overdo_cnt"/>
+            <column name="score"/>
+            <column name="rank_cnt"/>
+            <column name="rank_per"/>
         </columns>
     </export>
     <export id="11004" type="jdbc_batch" dataType="yz_alarm" batchNumber="100" target="exportTarger" enable="true">
@@ -99,9 +100,9 @@
             <column name="dtc_description"/>
             <column name="dtc_status"/>
             <column name="create_time"/>
-<!--            <column name="longitude"/>
-            <column name="latitude"/>
-            <column name="gps_locate_model"/>-->
+            <!--            <column name="longitude"/>
+                        <column name="latitude"/>
+                        <column name="gps_locate_model"/>-->
         </columns>
     </export>
 </templates>

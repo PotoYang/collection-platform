@@ -12,7 +12,7 @@ public class FieldInfo {
      * 例如：U8[2],这里长度就是2，默认为1
      */
     private int arrayLength = 1;
-    
+
     public FieldInfo(String name, int type) {
         this.name = name;
         this.type = type;
@@ -36,20 +36,20 @@ public class FieldInfo {
         this.coefficient = coefficient;
         this.isReverse = isReverse;
     }
-    
-    public FieldInfo(String name, int type,int arrayLength) {
+
+    public FieldInfo(String name, int type, int arrayLength) {
         this.name = name;
         this.type = type;
         this.arrayLength = arrayLength;
     }
-    
-    public FieldInfo(String name, int type, boolean isReverse,int arrayLength) {
+
+    public FieldInfo(String name, int type, boolean isReverse, int arrayLength) {
         this.name = name;
         this.type = type;
         this.isReverse = isReverse;
         this.arrayLength = arrayLength;
     }
-    
+
     public String getName() {
         return name;
     }
@@ -82,11 +82,11 @@ public class FieldInfo {
         isReverse = reverse;
     }
 
-	public int getArrayLength() {
-		return arrayLength;
-	}
+    public int getArrayLength() {
+        return arrayLength;
+    }
 
-	public void setArrayLength(int arrayLength) {
-		this.arrayLength = arrayLength;
-	}
+    public void setArrayLength(int arrayLength) {
+        this.arrayLength = arrayLength;
+    }
 }

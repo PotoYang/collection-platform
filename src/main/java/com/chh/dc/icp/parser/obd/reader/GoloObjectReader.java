@@ -7,6 +7,6 @@ import com.chh.dc.icp.warehouse.ParsedRecord;
 
 public interface GoloObjectReader {
 
-	 public List<ParsedRecord> readRecords(GoloResp resp) throws Exception;
-	 
+    public List<ParsedRecord> readRecords(GoloResp resp) throws Exception;
+
 }

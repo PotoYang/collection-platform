@@ -22,9 +22,9 @@ import org.slf4j.LoggerFactory;
  * Created by Niow on 2016/8/26.
  */
 public class AlarmReader extends HTWXReader {
-	private static final Logger log = LoggerFactory.getLogger(AlarmReader.class);
-	 private String deviceType = "3";
-	 private Integer gpsLocateModel = 1;
+    private static final Logger log = LoggerFactory.getLogger(AlarmReader.class);
+    private String deviceType = "3";
+    private Integer gpsLocateModel = 1;
 
     @Override
     public List<ParsedRecord> readRecord(byte[] bs) {
@@ -56,15 +56,15 @@ public class AlarmReader extends HTWXReader {
         //alam_code
         int alarm_count = ByteReaderUtil.readU8(bs, index++);
         for (int i = 0; i < alarm_count; i++) {
-        	//原始数据
+            //原始数据
             ParsedRecord alarmData = new ParsedRecord("htwx_alarm");
             Map<String, Object> alarmMap = alarmData.getRecord();
             index = readAlarmItem(alarmMap, bs, index);
-            
+
             String alarmType = (String) alarmMap.get("alarm_type");
             int alarmId = OBDAlarmCodeConverter.getCommonAlarmIdByHtwxId(alarmType);
             if (alarmId == 0) {
-                log.warn("告警类型不匹配{}",alarmType);
+                log.warn("告警类型不匹配{}", alarmType);
                 continue;
             }
             String warningDesc = OBDAlarmCodeConverter.getCommonAlarmDesc(alarmId);
@@ -88,9 +88,9 @@ public class AlarmReader extends HTWXReader {
             list.add(alarmData);
             //警情标志 =0 结束的警情 =1 新警情
             int newAlarmFlag = (int) alarmMap.get("new_alarm_flag");
-            if(newAlarmFlag == 0){
-            	log.debug("结束的警情:alarmId={},warning_desc={}", alarmId, warningDesc);
-            	continue;
+            if (newAlarmFlag == 0) {
+                log.debug("结束的警情:alarmId={},warning_desc={}", alarmId, warningDesc);
+                continue;
             }
             //汇总数据
             ParsedRecord deviceWarningData = new ParsedRecord("device_warning");
@@ -98,25 +98,25 @@ public class AlarmReader extends HTWXReader {
             list.add(deviceWarningData);
             //推送业务系统
             ParsedRecord warningData = new ParsedRecord("htwx_warning_to_stat");
-        	Map<String, Object> warningMap = warningData.getRecord();
-        	warningMap.put("device_uid", uid);
-        	warningMap.put("device_id", deviceId);
-        	warningMap.put("last_accon_time", lastAcconTime);
-        	warningMap.put("last_accon_time_sec", lastAcconTimeSec);
-        	warningMap.put("utctime", utctime);
-        	
+            Map<String, Object> warningMap = warningData.getRecord();
+            warningMap.put("device_uid", uid);
+            warningMap.put("device_id", deviceId);
+            warningMap.put("last_accon_time", lastAcconTime);
+            warningMap.put("last_accon_time_sec", lastAcconTimeSec);
+            warningMap.put("utctime", utctime);
+
             //熄火告警,输出待汇总告警数据
-            if("0x17".equals(alarmType)){
-            	warningMap.put("warning_type", alarmId);
-            	warningMap.put("warning_desc", OBDAlarmCodeConverter.getCommonAlarmDesc(alarmId));
-            	warningMap.put("collection_time", collectionTime);
-            	list.add(warningData);
-            }else if("0x0e".equals(alarmType)){//接头拔出    
-            	warningMap.put("warning_type", 65);
-            	warningMap.put("warning_value", DateUtil.getDateTimeString(collectionTime));
-            	warningMap.put("warning_desc", "失联报警");
-            	warningMap.put("collection_time", collectionTime);
-            	list.add(warningData);
+            if ("0x17".equals(alarmType)) {
+                warningMap.put("warning_type", alarmId);
+                warningMap.put("warning_desc", OBDAlarmCodeConverter.getCommonAlarmDesc(alarmId));
+                warningMap.put("collection_time", collectionTime);
+                list.add(warningData);
+            } else if ("0x0e".equals(alarmType)) {//接头拔出
+                warningMap.put("warning_type", 65);
+                warningMap.put("warning_value", DateUtil.getDateTimeString(collectionTime));
+                warningMap.put("warning_desc", "失联报警");
+                warningMap.put("collection_time", collectionTime);
+                list.add(warningData);
             }
         }
         return list;

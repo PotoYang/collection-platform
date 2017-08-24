@@ -42,7 +42,7 @@ public class DataBaseAccessor extends AbstractAccessor {
             sql.replace("{lastExecTime}", DateUtil.getDateTimeString(lastExecTime));
         }
         if (log.isDebugEnabled()) {
-            log.debug(getLogHead()+"执行SQL:{}",sql);
+            log.debug(getLogHead() + "执行SQL:{}", sql);
         }
         String dbDriver = taskInfo.getDbDriver();
         String dbUrl = taskInfo.getDbURL();

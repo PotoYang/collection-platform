@@ -10,7 +10,6 @@ import java.util.List;
 public class FaultReader extends DNAReader {
 
 
-
     @Override
     public List<ParsedRecord> readRecord(byte[] bs) {
         return null;

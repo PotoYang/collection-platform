@@ -4,7 +4,7 @@ import com.chh.dc.icp.db.pojo.TaskInfo;
 
 /**
  * 传入创建仓库的参数，做对象进行接口封装，方便后面加其他参数
- *
+ * <p>
  * Created by Niow on 2016/7/6.
  */
 public class RepositoryArgs {

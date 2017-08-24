@@ -33,13 +33,13 @@
     </bean>
 
 
-    <bean id="htwxSmart424Parser" class="com.chh.dc.icp.parser.obd.HTWXSmart424Parser" scope="prototype" init-method="init">
+    <bean id="htwxSmart424Parser" class="com.chh.dc.icp.parser.obd.HTWXSmart424Parser" scope="prototype"
+          init-method="init">
     </bean>
 
 
-
     <bean id="goloHttpAccessor" class="com.chh.dc.icp.accessor.GoloHttpAccessor" scope="prototype">
-    	<property name="deviceDAO" ref="deviceDAO"/>
+        <property name="deviceDAO" ref="deviceDAO"/>
     </bean>
     <bean id="goloOpenApiParser" class="com.chh.dc.icp.parser.obd.GoloOpenApiParser" scope="prototype">
     </bean>
@@ -52,10 +52,10 @@
     <bean id="OBDAlarmCodeConverter" class="com.chh.dc.icp.util.OBDAlarmCodeConverter">
         <property name="dtcDao" ref="dtcDAO"/>
     </bean>
-    
+
     <!-- redisCache -->
     <bean name="redisCache" class="com.chh.dc.icp.util.redis.RedisCache">
         <property name="jedisFactory" ref="test_redis"/>
     </bean>
-    
+
 </beans>

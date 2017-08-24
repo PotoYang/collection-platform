@@ -12,12 +12,12 @@ import com.chh.dc.icp.parser.obd.reader.FieldInfo;
 import com.chh.dc.icp.warehouse.ParsedRecord;
 
 /**
- * @author wangbin 
- * @date 2016年11月8日 下午3:43:40    
+ * @author wangbin
+ * @date 2016年11月8日 下午3:43:40
  * @Description: TODO
  */
 public class SnapReader extends HTWXReader {
-	private String deviceType = "3";
+    private String deviceType = "3";
     private Map<String, FieldInfo> fieldMap = new HashMap<String, FieldInfo>();
 
     {
@@ -104,7 +104,7 @@ public class SnapReader extends HTWXReader {
         fieldMap.put("2150", new FieldInfo("f_2150", 2, true));
         fieldMap.put("2151", new FieldInfo("f_2151", 1));
         fieldMap.put("2152", new FieldInfo("f_2152", 1));
-        fieldMap.put("2153", new FieldInfo("f_2153", 2, 0.005 ,true));
+        fieldMap.put("2153", new FieldInfo("f_2153", 2, 0.005, true));
         fieldMap.put("2154", new FieldInfo("f_2154", 2, true));
         fieldMap.put("2155", new FieldInfo("f_2155", 2));//1
         fieldMap.put("2156", new FieldInfo("f_2156", 2));//1
@@ -140,8 +140,8 @@ public class SnapReader extends HTWXReader {
         //data_count 数据流个数
         int dataCount = readU8(bs, index);
         index += 1;
-        if(dataCount > 0){
-        	//data_type_array
+        if (dataCount > 0) {
+            //data_type_array
             List<String> dataTypeList = new ArrayList<>();
             for (int i = 0; i < dataCount; i++) {
                 String dataType = readHexString(bs[index + 1]) + readHexString(bs[index]);
@@ -157,7 +157,7 @@ public class SnapReader extends HTWXReader {
             snapMap.put("last_accon_time_sec", statDataMap.get("last_accon_time_sec"));
             snapMap.put("utctime", statDataMap.get("utctime"));
             snapMap.put("collection_time", statDataMap.get("collection_time"));
-            
+
             for (int j = 0; j < dataCount; j++) {
                 String type = dataTypeList.get(j);
                 FieldInfo fieldInfo = fieldMap.get(type);

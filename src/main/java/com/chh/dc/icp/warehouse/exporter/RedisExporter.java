@@ -80,8 +80,8 @@ public class RedisExporter extends AbstractBufferedExporter {
         for (String subKey : this.replaceKey) {
             //String value = (String) record.get(subKey);
             Object value = record.get(subKey);
-            if(value instanceof Date) {
-                value = ((Date)value).getTime();
+            if (value instanceof Date) {
+                value = ((Date) value).getTime();
             }
             if (value == null) {
                 log.error("任务[{}][{}]在RedisExporter输出[{}]中替换key[{}]在record中对应值为空", taskInfo.getId(), taskInfo.getName(), template.getDataType(), subKey);
@@ -95,7 +95,7 @@ public class RedisExporter extends AbstractBufferedExporter {
 
     @Override
     protected void doRealExport(DataBlock dataBlock) throws Exception {
-        log.info("redisExporter输出数据[{}]条数[{}]",dataBlock.getDataType(),dataBlock.getData().size());
+        log.info("redisExporter输出数据[{}]条数[{}]", dataBlock.getDataType(), dataBlock.getData().size());
         List<ParsedRecord> data = dataBlock.getData();
         for (ParsedRecord record : data) {
             Map<String, Object> map = record.getRecord();
@@ -154,7 +154,7 @@ public class RedisExporter extends AbstractBufferedExporter {
                 }
                 case OP_HASH: {
                     Object field = record.get(option.getField());
-                    jedis.hset(key,field.toString().getBytes() ,data);
+                    jedis.hset(key, field.toString().getBytes(), data);
                     break;
                 }
             }

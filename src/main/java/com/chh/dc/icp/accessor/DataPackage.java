@@ -1,58 +1,62 @@
 package com.chh.dc.icp.accessor;
 
 /**
- * @ClassName: DataPacage
- * @since 1.0
- * @version 1.0
  * @author Niow
+ * @version 1.0
+ * @ClassName: DataPacage
  * @date: 2016-6-27
+ * @since 1.0
  */
-public class DataPackage{
+public class DataPackage {
 
-	/**
-	 * 数据源类型
-	 */
-	private int type;
+    /**
+     * 数据源类型
+     */
+    private int type;
 
-	/** 数据源对象 */
-	private Object data;
+    /**
+     * 数据源对象
+     */
+    private Object data;
 
-	/** 数据源描述信息 */
-	private String desc;
+    /**
+     * 数据源描述信息
+     */
+    private String desc;
 
-	public DataPackage(){}
+    public DataPackage() {
+    }
 
-	public DataPackage(Object data){
-		this.data = data;
-	}
+    public DataPackage(Object data) {
+        this.data = data;
+    }
 
-	public DataPackage(Object data, String desc){
-		this.data = data;
-		this.desc = desc;
-	}
+    public DataPackage(Object data, String desc) {
+        this.data = data;
+        this.desc = desc;
+    }
 
-	public void setData(Object data){
-		this.data = data;
-	}
+    public void setData(Object data) {
+        this.data = data;
+    }
 
-	public Object getData(){
-		return this.data;
-	}
+    public Object getData() {
+        return this.data;
+    }
 
-	/**
-	 * @return the desc
-	 */
-	public String getDesc(){
-		return desc;
-	}
+    /**
+     * @return the desc
+     */
+    public String getDesc() {
+        return desc;
+    }
 
-	/**
-	 * @param desc the desc to set
-	 */
-	public void setDesc(String desc){
-		this.desc = desc;
-	}
-
+    /**
+     * @param desc the desc to set
+     */
+    public void setDesc(String desc) {
+        this.desc = desc;
+    }
 
 
 }
