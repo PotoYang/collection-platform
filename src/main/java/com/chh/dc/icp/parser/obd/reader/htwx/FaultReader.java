@@ -33,7 +33,7 @@ public class FaultReader extends HTWXReader {
         List<ParsedRecord> faultList = readFaultCode(bs, index);
 
         if (faultList != null) {
-            String uid = deviceType + statDataMap.get("device_id");
+            String uid = "" + statDataMap.get("device_id");
             Object deviceId = statDataMap.get("device_id");
             Object utctime = statDataMap.get("utctime");
             Date lastAcconTime = (Date) statDataMap.get("last_accon_time");
@@ -46,14 +46,14 @@ public class FaultReader extends HTWXReader {
                 faultMap.put("utctime", utctime);
                 faultMap.put("last_accon_time", lastAcconTime);
                 faultMap.put("last_accon_time_sec", lastAcconTimeSec);
-                faultMap.put("device_uid", uid);
+                faultMap.put("device_id", uid);
                 faultMap.put("collection_time", collectionTime);
                 list.add(record);
                 //待汇总告警数据
                 ParsedRecord warningRecord = new ParsedRecord("htwx_warning_to_stat");
                 Map<String, Object> warningMap = warningRecord.getRecord();
                 warningMap.put("device_id", deviceId);
-                warningMap.put("device_uid", uid);
+                warningMap.put("device_id", uid);
                 warningMap.put("utctime", utctime);
                 warningMap.put("last_accon_time", lastAcconTime);
                 warningMap.put("last_accon_time_sec", lastAcconTimeSec);

@@ -29,7 +29,7 @@ public class AlarmReader extends HTWXReader {
     @Override
     public List<ParsedRecord> readRecord(byte[] bs) {
         String deviceId = readDeviceId(bs);
-        String uid = deviceType + deviceId;
+        String uid =  deviceId;
         List<ParsedRecord> list = new ArrayList<ParsedRecord>();
         Map<String, Object> statDataMap = new HashMap<String, Object>();
         int index = INDEX_DATA;
@@ -73,7 +73,7 @@ public class AlarmReader extends HTWXReader {
             alarmMap.put("warning_time", utctime);
 
             alarmMap.put("collection_time", collectionTime);
-            alarmMap.put("device_uid", uid);
+            alarmMap.put("device_id", uid);
             alarmMap.put("last_accon_time", lastAcconTime);
             alarmMap.put("last_accon_time_sec", lastAcconTimeSec);
 //            alarmMap.put("lat", lat);
@@ -99,7 +99,7 @@ public class AlarmReader extends HTWXReader {
             //推送业务系统
             ParsedRecord warningData = new ParsedRecord("htwx_warning_to_stat");
             Map<String, Object> warningMap = warningData.getRecord();
-            warningMap.put("device_uid", uid);
+            warningMap.put("device_id", uid);
             warningMap.put("device_id", deviceId);
             warningMap.put("last_accon_time", lastAcconTime);
             warningMap.put("last_accon_time_sec", lastAcconTimeSec);

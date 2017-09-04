@@ -43,7 +43,7 @@ public class GPSReader extends HTWXReader {
                 Map<String, Object> gpsItem = record.getRecord();
                 gpsItem.put("last_accon_time", last_accon_time);
                 gpsItem.put("last_accon_time_sec", statDataMap.get("last_accon_time_sec"));
-                gpsItem.put("device_uid", deviceType + deviceId);
+                gpsItem.put("device_id", deviceId);
                 gpsItem.put("gps_locate_model", gpsLocateModel);
                 gpsItem.put("utctime", utctime);
                 //将stat_data数据写入，最后一条gps_item

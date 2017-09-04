@@ -128,7 +128,7 @@ public class SnapReader extends HTWXReader {
     @Override
     public List<ParsedRecord> readRecord(byte[] bs) {
         String deviceId = readDeviceId(bs);
-        String uid = deviceType + deviceId;
+        String uid =  deviceId;
         List<ParsedRecord> list = new ArrayList<ParsedRecord>();
         Map<String, Object> statDataMap = new HashMap<>();
         int index = INDEX_DATA;
@@ -152,7 +152,7 @@ public class SnapReader extends HTWXReader {
             ParsedRecord snapData = new ParsedRecord("htwx_snap");
             Map<String, Object> snapMap = snapData.getRecord();
             snapMap.put("device_id", deviceId);
-            snapMap.put("device_uid", uid);
+            snapMap.put("device_id", uid);
             snapMap.put("last_accon_time", statDataMap.get("last_accon_time"));
             snapMap.put("last_accon_time_sec", statDataMap.get("last_accon_time_sec"));
             snapMap.put("utctime", statDataMap.get("utctime"));

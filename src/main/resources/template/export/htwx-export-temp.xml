@@ -26,9 +26,8 @@
             <column name="lat"/>
             <column name="lon"/>
             <column name="satellites"/>
-            <column name="device_id"/>
             <column name="collection_time"/>
-            <column name="device_uid"/>
+            <column name="device_id"/>
             <column name="last_accon_time"/>
             <column name="total_trip_mileage"/>
             <column name="current_trip_milea"/>
@@ -42,7 +41,7 @@
     <export id="12002" type="jdbc_batch" dataType="htwx_gps" batchNumber="100" target="exportTarger" enable="true">
         <table name="t_device_gps"/>
         <columns>
-            <column name="device_uid"/>
+            <column name="device_id"/>
             <column name="gps_time" property="utctime"/>
             <column name="longitude" property="lon"/>
             <column name="latitude" property="lat"/>
@@ -64,9 +63,8 @@
             <column name="lat"/>
             <column name="lon"/>
             <column name="satellites"/>
-            <column name="device_id"/>
             <column name="collection_time"/>
-            <column name="device_uid"/>
+            <column name="device_id"/>
             <column name="last_accon_time"/>
             <column name="total_trip_mileage"/>
             <column name="current_trip_milea"/>
@@ -80,7 +78,7 @@
     <export id="12004" type="jdbc_batch" dataType="htwx_gps_his" batchNumber="100" target="exportTarger" enable="true">
         <table name="t_device_gps"/>
         <columns>
-            <column name="device_uid"/>
+            <column name="device_id"/>
             <column name="gps_time" property="gps_time"/>
             <column name="longitude" property="lon"/>
             <column name="latitude" property="lat"/>
@@ -101,7 +99,6 @@
             <column name="fault_flag"/>
             <column name="fault_code"/>
             <column name="fault_desc"/>
-            <column name="device_uid"/>
             <column name="last_accon_time"/>
         </columns>
     </export>
@@ -113,7 +110,7 @@
             <column name="dtc_status"/>
             <column name="gps_time" property="utctime"/>
             <column name="create_time" property="collection_time"/>
-            <column name="device_uid"/>
+            <column name="device_id"/>
         </columns>
     </export>
 
@@ -127,19 +124,17 @@
             <column name="alarm_type"/>
             <column name="alarm_desc"/>
             <column name="alarm_threshold"/>
-
-            <column name="device_uid"/>
             <column name="last_accon_time"/>
             <column name="lat" property="latitude"/>
             <column name="lon" property="longitude"/>
         </columns>
     </export>
-    <export id="12008" type="jdbc_batch" dataType="device_warning" batchNumber="100" target="exportTarger"
+    <export id="12008" type="jdbc_batch" dataType="device_warning" batchNumber="100" target="exportOBD"
             enable="true">
         <table name="t_device_warning"/>
         <columns>
             <column name="id"/>
-            <column name="device_uid"/>
+            <column name="device_id"/>
             <column name="warning_type"/>
             <column name="warning_desc"/>
             <column name="warning_time"/>
@@ -155,7 +150,6 @@
         <columns>
             <column name="device_id"/>
             <column name="utctime"/>
-            <column name="device_uid"/>
             <column name="last_accon_time"/>
             <column name="collection_time"/>
             <column name="f_2100"/>
