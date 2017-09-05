@@ -2,26 +2,32 @@ package com.chh.dc.icp.parser.obd.reader.vk;
 
 import com.chh.dc.icp.parser.obd.reader.ByteArrayReader;
 import com.chh.dc.icp.util.ByteReaderUtil;
-import com.chh.dc.icp.util.StringUtil;
-import com.chh.dc.icp.warehouse.ParsedRecord;
 
-import java.util.*;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
+import java.util.TimeZone;
 
 /**
  * Created by 申卓 on 2017/9/4.
  */
 public abstract class VKReader extends ByteArrayReader {
 
-    /** *MG20{}  从第6位开始是id**/
+    /**
+     * MG20{}  从第6位开始是id
+     **/
     public static final int INDEX_ID = 6;
 
     public static final int INDEX_PROTOCOL_TYPE = 25;
 
-    /** 从第23位开始 是功能类型编码*/
+    /**
+     * 从第23位开始 是功能类型编码
+     */
     public static final int INDEX_DATA = 23;
 
     /**
      * 读取接收设备的id
+     *
      * @param bs
      * @return
      */
@@ -29,7 +35,7 @@ public abstract class VKReader extends ByteArrayReader {
         int index = INDEX_ID;
         StringBuilder sb = new StringBuilder();
         int i;
-        while ((i=bs[index++])!=',') {
+        while ((i = bs[index++]) != ',') {
             sb.append((char) i);
         }
         return sb.toString().trim();
@@ -37,6 +43,7 @@ public abstract class VKReader extends ByteArrayReader {
 
     /**
      * 假设数据为固定长度  功能类型编码在 第23位 based 1
+     *
      * @param bs
      * @return
      */
@@ -46,34 +53,74 @@ public abstract class VKReader extends ByteArrayReader {
     }
 
 
+//    public abstract List<ParsedRecord> readRecord(byte[] bs) throws Exception;
+//
+//    protected Date readDateTime(byte[] bs, int start) {
+//        long seconds = ByteReaderUtil.readU32(bs, start, true);
+//        Date dateTime = new Date(seconds * 1000L);
+//        return dateTime;
+//    }
+
+    /**
+     * &A 附加信息中读取时间数据
+     *
+     * @param bs
+     * @param start Ahhmmss
+     * @return
+     */
+    protected Date readDateAndtime(byte[] bs, int start) {
+        int start2 = start + 28;
+        int start1 = start;
+        int day = ByteReaderUtil.readAscii2byte(bs, start2);
+        start2 += 2;
+        int month = ByteReaderUtil.readAscii2byte(bs, start2);
+        start2 += 2;
+        int year = ByteReaderUtil.readAscii2byte(bs, start2);
 
 
-    public abstract List<ParsedRecord> readRecord(byte[] bs);
+        int hour = ByteReaderUtil.readAscii2byte(bs, start1);
+        start1 += 2;
+        int minute = ByteReaderUtil.readAscii2byte(bs, start1);
+        start1 += 2;
+        int second = ByteReaderUtil.readAscii2byte(bs, start1);
 
-    protected Date readDateTime(byte[] bs, int start) {
-        long seconds = ByteReaderUtil.readU32(bs, start, true);
-        Date dateTime = new Date(seconds * 1000L);
-        return dateTime;
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(Calendar.HOUR_OF_DAY, hour);
+        calendar.set(Calendar.MINUTE, minute);
+        calendar.set(Calendar.SECOND, second);
+        calendar.set(Calendar.YEAR, year + 2000);
+        calendar.set(Calendar.MONTH, month - 1);
+        calendar.set(Calendar.DAY_OF_MONTH, day);
+        calendar.setTimeZone(TimeZone.getTimeZone("GMT+0"));
+        return calendar.getTime();
     }
 
-//    protected Date readDateAndtime(byte[] bs, int start) {
-//        int index = start;
-//        int day = ByteReaderUtil.readInt(bs[index++]);
-//        int month = ByteReaderUtil.readInt(bs[index++]);
-//        int year = ByteReaderUtil.readInt(bs[index++]);
-//        int hour = ByteReaderUtil.readInt(bs[index++]);
-//        int minute = ByteReaderUtil.readInt(bs[index++]);
-//        int second = ByteReaderUtil.readInt(bs[index++]);
-//        Calendar calendar = Calendar.getInstance();
-//        calendar.set(Calendar.HOUR_OF_DAY, hour);
-//        calendar.set(Calendar.MINUTE, minute);
-//        calendar.set(Calendar.SECOND, second);
-//        calendar.set(Calendar.YEAR, year + 2000);
-//        calendar.set(Calendar.MONTH, month - 1);
-//        calendar.set(Calendar.DAY_OF_MONTH, day);
-//        calendar.setTimeZone(TimeZone.getTimeZone("GMT+0"));
-//        return calendar.getTime();
-//    }
+    /**
+     * 读取 GPS 经度
+     * 是 9 位的经度信息，后 4 位为小数部分，
+     *
+     * @param bs
+     * @param start
+     * @return
+     */
+    protected double readLongitude(byte[] bs, int start) {
+        if (bs.length < start + 8) {
+            return 0.0;
+        }
+        double degree = (bs[start] - '0') * 100 + (bs[start + 1] - '0') * 10 + (bs[start + 2] - '0');
+        double decimal = (bs[start + 3] - '0') * 10 + (bs[start + 4] - '0') + (bs[start + 5] - '0') * 0.1 +
+                (bs[start + 6] - '0') * 0.01 + (bs[start + 7] - '0') * 0.01 + (bs[start + 8] - '0') * 0.001;
+
+        return degree + decimal / 60.0;
+    }
+
+    protected double readLatitude(byte[] bs, int start){
+        double degree = (bs[start] - '0') * 10 + (bs[start + 1] - '0');
+        double decimal = (bs[start + 2] - '0') * 10 + (bs[start + 3] - '0') + (bs[start + 4] - '0') * 0.1 +
+                (bs[start + 5] - '0') * 0.01 + (bs[start + 6] - '0') * 0.01 + (bs[start + 7] - '0') * 0.001;
+
+        return degree + decimal / 60.0;
+    }
 
 
 //    protected int readStatData(Map<String, Object> map, byte[] bs, int start) {
