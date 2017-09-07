@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- <export>配置 -->
+<!-- id:为全局唯一整数-->
+<!-- type:jdbc  每次单独获取连接，然后输入一批数据-->
+<!--      jdbc_pool 使用连接池输出数据-->
+<!--      jdbc_pool_tolerant 容错连接池输出，一批数据中有错误数据时，其他数据正常提交-->
+<!-- dataType: 数据描述全局标识-->
+<!-- target: 数据库输出填写数据源-->
+<!--         文件输出填写文件路径和名称-->
+<!-- enable: 开关true时可用 -->
+<!--    <table>: name 数据库输出时填写表名 -->
+<!--    <columns>:数据输出对应字段列表 -->
+<!--         <column>  -->
+<!--             name:表字段名  -->
+<!--             property:数据字段名  -->
+<!--             format:数据为字符串时间格式  -->
+<templates>
+    <export id="14001" type="jdbc_batch" dataType="vk_gps" batchNumber="100" target="exportTarger" enable="true">
+        <table name="t_vk_gps"/>
+        <columns>
+            <column name="device_id"/>
+            <column name="collection_time"/>
+            <column name="utc_time"/>
+            <column name="latitude"/>
+            <column name="longitude"/>
+            <column name="latitude_flag"/>
+            <column name="longitude_flag"/>
+            <column name="located"/>
+            <column name="speed"/>
+            <column name="direction"/>
+        </columns>
+    </export>
+    <export id="14002" type="jdbc_batch" dataType="vk_can" batchNumber="100" target="exportTarger" enable="true">
+        <table name="t_vk_can"/>
+        <columns>
+            <column name="id"/>
+            <column name="device_id"/>
+            <column name="collection_time"/>
+            <column name="utc_time"/>
+            <column name="latitude"/>
+            <column name="longitude"/>
+            <column name="latitude_flag"/>
+            <column name="longitude_flag"/>
+            <column name="located"/>
+            <column name="speed"/>
+            <column name="direction"/>
+            <column name="BS00"/>
+            <column name="BS01"/>
+            <column name="BS03"/>
+            <column name="BS10"/>
+            <column name="BS11"/>
+            <column name="BS12"/>
+            <column name="BS13"/>
+            <column name="BS20"/>
+            <column name="BS212"/>
+            <column name="BS23"/>
+            <column name="BS30"/>
+            <column name="BS31"/>
+            <column name="BS32"/>
+            <column name="BS33"/>
+            <column name="BS40"/>
+            <column name="BS41"/>
+            <column name="BS42"/>
+            <column name="BS43"/>
+
+            <column name="HS00"/>
+            <column name="HS01"/>
+            <column name="HS02"/>
+            <column name="HS03"/>
+            <column name="HS04"/>
+            <column name="HS05"/>
+            <column name="HS06"/>
+            <column name="HS07"/>
+
+            <column name="HS10"/>
+            <column name="HS11"/>
+            <column name="HS12"/>
+            <column name="HS13"/>
+            <column name="HS14"/>
+            <column name="HS15"/>
+
+
+            <column name="HS20"/>
+            <column name="HS21"/>
+            <column name="HS22"/>
+            <column name="HS23"/>
+            <column name="HS24"/>
+            <column name="HS25"/>
+            <column name="HS26"/>
+            <column name="HS27"/>
+
+            <column name="HS30"/>
+            <column name="HS31"/>
+            <column name="HS32"/>
+            <column name="HS33"/>
+            <column name="HS34"/>
+            <column name="HS35"/>
+            <column name="HS36"/>
+
+
+            <column name="speed"/>
+            <column name="height"/>
+            <column name="mileage"/>
+            <column name="fuel_consumption"/>
+            <column name="fuel_per_km"/>
+            <column name="start_time"/>
+
+        </columns>
+    </export>
+    <export id="14003" type="jdbc_batch" dataType="vk_alarm" batchNumber="100" target="exportTarger" enable="true">
+        <table name="t_vk_alarm"/>
+        <columns>
+            <column name="device_id"/>
+            <column name="utc_time"/>
+            <column name="collection_time"/>
+            <column name="alarm_type"/>
+            <column name="alarm_description"/>
+        </columns>
+    </export>
+</templates>
