@@ -33,8 +33,10 @@
     </bean>
 
 
-    <bean id="htwxSmart424Parser" class="com.chh.dc.icp.parser.obd.HTWXSmart424Parser" scope="prototype"
-          init-method="init">
+    <bean id="htwxSmart424Parser" class="com.chh.dc.icp.parser.obd.HTWXSmart424Parser" scope="prototype">
+    </bean>
+
+    <bean id="vkGPSParser" class="com.chh.dc.icp.parser.obd.VKGPSParser" scope="prototype">
     </bean>
 
 

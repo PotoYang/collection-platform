@@ -56,8 +56,10 @@
     <bean id="mysql" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
         <property name="driverClass" value="com.mysql.jdbc.Driver"/>
         <property name="jdbcUrl" value="jdbc:mysql://123.249.3.137:3306/dc?characterEncoding=utf8"/>
+        <!--<property name="jdbcUrl" value="jdbc:mysql://127.0.0.1:3306/collection?characterEncoding=utf8"/>-->
         <property name="user" value="root"/>
         <property name="password" value="chhRootDB123"/>
+        <!--<property name="password" value="123"/>-->
         <!--连接池中保留的最大连接数。默认值: 15 -->
         <property name="maxPoolSize" value="15"/>
         <!-- 连接池中保留的最小连接数，默认为：3-->
