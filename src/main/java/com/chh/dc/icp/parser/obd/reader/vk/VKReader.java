@@ -1,17 +1,26 @@
 package com.chh.dc.icp.parser.obd.reader.vk;
 
+import com.chh.dc.icp.db.dao.DtcDAO;
 import com.chh.dc.icp.parser.obd.reader.ByteArrayReader;
 import com.chh.dc.icp.util.ByteReaderUtil;
+import com.chh.dc.icp.warehouse.ParsedRecord;
 
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
-import java.util.TimeZone;
+import java.util.*;
 
 /**
  * Created by 申卓 on 2017/9/4.
  */
 public abstract class VKReader extends ByteArrayReader {
+
+    protected static DtcDAO dtcDao = new DtcDAO();
+
+    protected static Map<Integer, String> alarmMap;
+
+    protected int index = INDEX_DATA;
+
+    public void init() throws Exception {
+        alarmMap = dtcDao.getAlarmDtc();
+    }
 
     /**
      * MG20{}  从第6位开始是id
@@ -52,14 +61,6 @@ public abstract class VKReader extends ByteArrayReader {
         return String.valueOf(bs[index]);
     }
 
-
-//    public abstract List<ParsedRecord> readRecord(byte[] bs) throws Exception;
-//
-//    protected Date readDateTime(byte[] bs, int start) {
-//        long seconds = ByteReaderUtil.readU32(bs, start, true);
-//        Date dateTime = new Date(seconds * 1000L);
-//        return dateTime;
-//    }
 
     /**
      * &A 附加信息中读取时间数据
@@ -114,7 +115,15 @@ public abstract class VKReader extends ByteArrayReader {
         return degree + decimal / 60.0;
     }
 
-    protected double readLatitude(byte[] bs, int start){
+    /**
+     * 读取 GPS 纬度
+     * 是 8 位的纬度信息，后 4 位为小数部分，
+     *
+     * @param bs
+     * @param start
+     * @return
+     */
+    private double readLatitude(byte[] bs, int start) {
         double degree = (bs[start] - '0') * 10 + (bs[start + 1] - '0');
         double decimal = (bs[start + 2] - '0') * 10 + (bs[start + 3] - '0') + (bs[start + 4] - '0') * 0.1 +
                 (bs[start + 5] - '0') * 0.01 + (bs[start + 6] - '0') * 0.01 + (bs[start + 7] - '0') * 0.001;
@@ -122,153 +131,292 @@ public abstract class VKReader extends ByteArrayReader {
         return degree + decimal / 60.0;
     }
 
+    protected void parseBHCFG_Can(List<ParsedRecord> list, String str, byte[] bs, Date date) {
+        ParsedRecord parsedRecord = new ParsedRecord("vk_can");
+        Map<String, Object> map = parsedRecord.getRecord();
 
-//    protected int readStatData(Map<String, Object> map, byte[] bs, int start) {
-//        int index = start;
-//        String deviceId = readDeviceId(bs);
-//        map.put("device_id", deviceId);
-//        long seconds = ByteReaderUtil.readU32(bs, start, true);
-//        map.put("last_accon_time_sec", seconds);
-//        map.put("last_accon_time", new Date(seconds * 1000L));
-//        index += 4;
-//        //utc_time是关键字
-//        map.put("utctime", readDateTime(bs, index));
-//        index += 4;
-//        map.put("total_trip_mileage", ByteReaderUtil.readU32(bs, index, true));
-//        index += 4;
-//        map.put("current_trip_milea", ByteReaderUtil.readU32(bs, index, true));
-//        index += 4;
-//        map.put("total_fuel", ByteReaderUtil.readU32(bs, index, true) * 0.01);
-//        index += 4;
-//        map.put("current_fuel", ByteReaderUtil.readU16(bs, index, true) * 0.01);
-//        index += 2;
-////        index = readVStatus(map, bs, index);
-//        map.put("vstate", ByteReaderUtil.readU32(bs, index));
-//        index += 4;
-//        map.put("reserve", ByteReaderUtil.readHexString(bs, index, 8));
-//        index += 8;
-//        map.put("collection_time", new Date());
-//        return index;
-//    }
+        int index = str.indexOf("&B");
+        if (index > 0) {
+            index += 2;
 
-//    protected int readVStatus(Map<String, Object> map, byte[] bs, int start) {
-//        int index = start;
-//        byte s0 = bs[index++];
-//        map.put("s07", ByteReaderUtil.readBit(s0, 0));
-//        map.put("s06", ByteReaderUtil.readBit(s0, 1));
-//        map.put("s05", ByteReaderUtil.readBit(s0, 2));
-//        map.put("s04", ByteReaderUtil.readBit(s0, 3));
-//        map.put("s03", ByteReaderUtil.readBit(s0, 4));
-//        map.put("s02", ByteReaderUtil.readBit(s0, 5));
-//        map.put("s01", ByteReaderUtil.readBit(s0, 6));
-//        map.put("s00", ByteReaderUtil.readBit(s0, 7));
-//        byte s1 = bs[index++];
-//        map.put("s17", ByteReaderUtil.readBit(s1, 0));
-//        map.put("s16", ByteReaderUtil.readBit(s1, 1));
-//        map.put("s15", ByteReaderUtil.readBit(s1, 2));
-//        map.put("s14", ByteReaderUtil.readBit(s1, 3));
-//        map.put("s13", ByteReaderUtil.readBit(s1, 4));
-//        map.put("s12", ByteReaderUtil.readBit(s1, 5));
-//        map.put("s11", ByteReaderUtil.readBit(s1, 6));
-//        map.put("s10", ByteReaderUtil.readBit(s1, 7));
-//        byte s2 = bs[index++];
-//        map.put("s27", ByteReaderUtil.readBit(s2, 0));
-//        map.put("s26", ByteReaderUtil.readBit(s2, 1));
-//        map.put("s25", ByteReaderUtil.readBit(s2, 2));
-//        map.put("s24", ByteReaderUtil.readBit(s2, 3));
-//        map.put("s23", ByteReaderUtil.readBit(s2, 4));
-//        map.put("s22", ByteReaderUtil.readBit(s2, 5));
-//        map.put("s21", ByteReaderUtil.readBit(s2, 6));
-//        map.put("s20", ByteReaderUtil.readBit(s2, 7));
-//        byte s3 = bs[index++];
-//        map.put("s37", ByteReaderUtil.readBit(s3, 0));
-//        map.put("s36", ByteReaderUtil.readBit(s3, 1));
-//        map.put("s35", ByteReaderUtil.readBit(s3, 2));
-//        map.put("s34", ByteReaderUtil.readBit(s3, 3));
-//        map.put("s33", ByteReaderUtil.readBit(s3, 4));
-//        map.put("s32", ByteReaderUtil.readBit(s3, 5));
-//        map.put("s31", ByteReaderUtil.readBit(s3, 6));
-//        map.put("s30", ByteReaderUtil.readBit(s3, 7));
-//        return index;
-//    }
+            map.put("device_id", readDeviceId(bs));
+            if (date != null) {
+                map.put("utc_time", date);
+            }
+            map.put("collection_time", new Date());
 
-//    protected List<ParsedRecord> readGPSData(byte[] bs, int start) {
-//        ////flag 0x00 表示常规 GPS 数据上传 0x01 表示历史 GPS 数据上传
-//        int flag = ByteReaderUtil.readU8(bs, INDEX_DATA);
-//        String type = flag == 0 ? "htwx_gps" : "htwx_gps_his";
-//        int index = start;
-//        int gpsCount = ByteReaderUtil.readInt(bs[index++]);
-//        if (gpsCount <= 0) {
-//            return null;
-//        }
-//        String deviceId = readDeviceId(bs);
-//        List<ParsedRecord> list = new ArrayList<ParsedRecord>();
-//        Date now = new Date();
-//        for (int i = 0; i < gpsCount; i++) {
-//            ParsedRecord record = new ParsedRecord(type);
-//            index = readGPSItem(record.getRecord(), bs, index);
-//            record.putData("device_id", deviceId);
-//            record.putData("collection_time", now);
-//            //判断是否定位，如果未定位，则当做历史数据类型（历史数据类型不输出lastGpsCache）
-//            boolean isLocated = (boolean) record.getData("isLocated");
-//            if (!isLocated) {
-//                record.setType("htwx_gps_his");
-//            }
-//            list.add(record);
-//        }
-//        return list;
-//    }
 
-//    protected int readGPSItem(Map<String, Object> map, byte[] bs, int start) {
-//        int index = start;
-//        map.put("gps_time", readDateAndtime(bs, index));
-//        index += 6;
-//        double lat = ByteReaderUtil.readU32(bs, index, true) / 3600000.0;
-//        index += 4;
-//        double lon = ByteReaderUtil.readU32(bs, index, true) / 3600000.0;
-//        index += 4;
-//        //speed cm/sec转成m/sec
-//        map.put("speed", ByteReaderUtil.readU16(bs, index, true) / 100.0);
-//        index += 2;
-//        //dir 1/10度转成度
-//        map.put("dir", ByteReaderUtil.readU16(bs, index, true) / 10.0);
-//        index += 2;
-////       读取valflag 小头bit7-bit0
-//        int ew = ByteReaderUtil.readBit(bs[index], 7 - 0);
-////      ew：1为东经，0为西经
-//        if (ew == 0) {
-//            lat = lat * -1;
-//        }
-//        map.put("lat", lat);
-////       sn:1为北纬,0为南纬 小头bit7-bit0
-//        int sn = ByteReaderUtil.readBit(bs[index], 7 - 1);
-//        if (sn == 0) {
-//            lon = lon * -1;
-//        }
-//        map.put("lon", lon);
-////        int satellites = readU8(bs, index) & 0x0f;
-////        map.put("satellites", satellites);
-////        index += 1;
-//        byte valflagBytes = bs[index++];
-//        //定位标志  00---未定位 01---2D 定位 11---3D 定位   小头bit7-bit0
-//        String locatedNo = String.valueOf(ByteReaderUtil.readBit(valflagBytes, 7 - 2)) + ByteReaderUtil.readBit(valflagBytes, 7 - 3);
-//        //true：定位，false：未定位
-//        boolean isLocated = false;
-//        if (StringUtil.isNotNull(locatedNo) && !"00".equals(locatedNo))
-//            isLocated = true;
-//        map.put("isLocated", isLocated);
-//        return index;
-//    }
+            map.put("BS00", (bs[index] & 0x01 - '0'));
+            map.put("BS01", (bs[index] & 0x02 - '0'));
+            map.put("BS02", (bs[index] & 0x04 - '0'));
+            map.put("BS03", (bs[index] & 0x08 - '0'));
+            index++;
 
-    protected List<Integer> readRpmItem(byte[] bs, int start) {
-        int index = start;
-        int rpmCount = ByteReaderUtil.readInt(bs[index++]);
-        if (rpmCount <= 0) {
-            return null;
+
+            map.put("BS10", (bs[index] & 0x01 - '0'));
+            map.put("BS11", (bs[index] & 0x02 - '0'));
+            map.put("BS12", (bs[index] & 0x04 - '0'));
+            map.put("BS13", (bs[index] & 0x08 - '0'));
+            index++;
+
+            map.put("BS20", (bs[index] & 0x01 - '0'));
+            map.put("BS212", (bs[index] & 0x06 - '0'));
+            map.put("BS23", (bs[index] & 0x08 - '0'));
+            index++;
+
+            map.put("BS30", (bs[index] & 0x01 - '0'));
+            map.put("BS31", (bs[index] & 0x02 - '0'));
+            map.put("BS32", (bs[index] & 0x04 - '0'));
+            map.put("BS33", (bs[index] & 0x08 - '0'));
+            index++;
+
+            map.put("BS40", (bs[index] & 0x01 - '0'));
+            map.put("BS41", (bs[index] & 0x02 - '0'));
+            map.put("BS42", (bs[index] & 0x04 - '0'));
+            map.put("BS43", (bs[index] & 0x08 - '0'));
+            index++;
         }
-        return null;
+        index = str.indexOf("&H");
+        if (index > 0) {
+            map.put("HS00", (bs[index] & 0x01 - '0'));
+            map.put("HS01", (bs[index] & 0x02 - '0'));
+            map.put("HS02", (bs[index] & 0x04 - '0'));
+            map.put("HS03", (bs[index] & 0x08 - '0'));
+            map.put("HS04", (bs[index] >> 4 & 0x01 - '0'));
+            map.put("HS05", (bs[index] >> 4 & 0x02 - '0'));
+            map.put("HS06", (bs[index] >> 4 & 0x04 - '0'));
+            map.put("HS07", (bs[index] >> 4 & 0x08 - '0'));
+            index++;
+
+            map.put("HS10", (bs[index] & 0x01 - '0'));
+            map.put("HS11", (bs[index] & 0x02 - '0'));
+            map.put("HS12", (bs[index] & 0x04 - '0'));
+            map.put("HS13", (bs[index] & 0x08 - '0'));
+            map.put("HS14", (bs[index] >> 4 & 0x01 - '0'));
+            map.put("HS15", (bs[index] >> 4 & 0x02 - '0'));
+            index++;
+
+            map.put("HS20", (bs[index] & 0x01 - '0'));
+            map.put("HS21", (bs[index] & 0x02 - '0'));
+            map.put("HS22", (bs[index] & 0x04 - '0'));
+            map.put("HS23", (bs[index] & 0x08 - '0'));
+            map.put("HS24", (bs[index] >> 4 & 0x01 - '0'));
+            map.put("HS25", (bs[index] >> 4 & 0x02 - '0'));
+            map.put("HS26", (bs[index] >> 4 & 0x04 - '0'));
+            map.put("HS27", (bs[index] >> 4 & 0x08 - '0'));
+            index++;
+
+            map.put("HS30", (bs[index] & 0x01 - '0'));
+            map.put("HS31", (bs[index] & 0x02 - '0'));
+            map.put("HS32", (bs[index] & 0x04 - '0'));
+            map.put("HS33", (bs[index] & 0x08 - '0'));
+            map.put("HS34", (bs[index] >> 4 & 0x01 - '0'));
+            map.put("HS35", (bs[index] >> 4 & 0x02 - '0'));
+            map.put("HS36", (bs[index] >> 4 & 0x04 - '0'));
+            index++;
+        }
+        index = str.indexOf("&C");
+        if (index > 0) {
+            parseC_mileage(map, bs, index);
+        }
+        index = str.indexOf("&F");
+        if (index > 0) {
+            parseF_speed(map, bs, index);
+        }
+        index = str.indexOf("&G");
+        if (index > 0) {
+            parseG_height(map, bs, index);
+        }
+
+        /**
+         * OBD 实时行程数据
+         */
+        index = str.indexOf("&R");
+        if (index > 0) {
+            int end = str.indexOf('&', index + 1);
+            if (end < 0) {
+                end = str.length() - 1;
+            }
+            parseR_OBD(map, bs, index, end);
+        }
+
+        list.add(parsedRecord);
     }
 
+    /**
+     * 解析GPS中的
+     *
+     * @param list
+     * @param str
+     * @param bs
+     */
+    protected Date parseA_GPS(List<ParsedRecord> list, String str, byte[] bs) {
+        /******************&A****************/
+        int index = str.indexOf("&A");
+        if (index < 0)
+            return null;
+        index += 2;
+        ParsedRecord parsedRecord = new ParsedRecord("vk_gps");
+        Date date = readDateAndtime(bs, index);
+        index += 6;
+
+        // 纬度信息
+        double latitude = readLatitude(bs, index);
+        index += 8;
+
+        //经度信息
+        double longitude = readLongitude(bs, index);
+        index += 9;
+
+        int b = bs[index] & 0x08;
+        String latitudeFlag = (bs[index] & 0x04) == 0 ? "west" : "east";
+        String longitudeFlag = (bs[index] & 0x02) == 0 ? "south" : "north";
+        String located = (bs[index] & 0x04) == 0 ? "true" : "false";
+
+        int speed = ByteReaderUtil.readIntU16(bs, index);
+        index += 2;
+
+        int direction = ByteReaderUtil.readIntU16(bs, index);
+        index += 2;
+
+        index += 7;
+        if (Character.isDigit((char) bs[index])) {
+            String HDOP_str = str.substring(index, index + 9);
+            double HDOP = Double.parseDouble(HDOP_str);
+            parsedRecord.getRecord().put("hdop", HDOP);
+        }
+
+        parsedRecord.getRecord().put("device_id", readDeviceId(bs));
+        parsedRecord.getRecord().put("collection_time", new Date());
+        parsedRecord.getRecord().put("utc_time", date);
+        parsedRecord.getRecord().put("latitude", latitude);
+        parsedRecord.getRecord().put("longitude", longitude);
+        parsedRecord.getRecord().put("latitude_flag", latitudeFlag);
+        parsedRecord.getRecord().put("longitude_flag", longitudeFlag);
+        parsedRecord.getRecord().put("located", located);
+        parsedRecord.getRecord().put("speed", speed);
+        parsedRecord.getRecord().put("direction", direction);
+
+        list.add(parsedRecord);
+
+        return date;
+    }
+
+    private void parseC_mileage(Map<String, Object> map, byte[] bs, int index) {
+        index += 2;
+
+    }
+
+    private void parseF_speed(Map<String, Object> map, byte[] bs, int index) {
+        index += 2;
+        int hundred = bs[index] - '0';
+        int ten = bs[index + 1] - '0';
+        int bit = bs[index + 2] - '0';
+        int decimal = bs[index + 3] - '0';
+        // 单位 节
+        double speed = hundred * 100 + ten * 10 + bit + decimal * 0.1;
+        // 单位  km
+        speed *= 1.852;
+        map.put("speed", speed);
+    }
+
+    private void parseG_height(Map<String, Object> map, byte[] bs, int index) {
+        index += 2;
+        String strHeight = new String(bs, index, 5);
+        int intHeight = Integer.parseInt(strHeight);
+        double height = intHeight + 0.1 * (bs[index + 5] - '0');
+        if (height > 20000) {
+            height = -height;
+        }
+        map.put("height", height);
+    }
+
+    protected void parseK_weigh(List<ParsedRecord> list, String str, byte[] bs) {
+
+    }
+
+    protected void parseM_capacity(List<ParsedRecord> list, String str, byte[] bs) {
+
+    }
+
+    protected void parseN_GSM(List<ParsedRecord> list, String str, byte[] bs) {
+
+    }
+
+    protected void parseO_GPS(List<ParsedRecord> list, String str, byte[] bs) {
+
+    }
+
+    private void parseR_OBD(Map<String, Object> map, byte[] bs, int start, int end) {
+        start += 2;
+        String str = new String(bs, start, end - start);
+        String[] strArr = str.split(",");
+        int mileage = Integer.parseInt(strArr[0].trim());
+        int fuelConsumption = Integer.parseInt(strArr[1].trim());
+        int fuelPerKM = Integer.parseInt(strArr[2].trim());
+        int startTime = Integer.parseInt(strArr[3].trim());
+
+        map.put("mileage", mileage);
+        map.put("fuel_consumption", fuelConsumption);
+        map.put("fuel_per_km", fuelPerKM);
+        map.put("start_time", startTime);
+    }
+
+    protected void parseAlarm(List<ParsedRecord> list, String str, byte[] bs, Date utc_time) {
+        List<ParsedRecord> parsedRecords = new ArrayList<>();
+        int index = str.indexOf("&B");
+        if (index > 0) {
+            index += 7;
+            for (int i = 0; i < 5; i++) {
+                for (int j = 0; j < 4; j++) {
+                    int k = bs[index + i] & ((byte) (0x1 << j));
+                    if (k != 0) {
+                        ParsedRecord parsedRecord = createParsedRecord(bs,utc_time);
+                        parsedRecord.getRecord().put("alarm_type", alarmMap.get("200" + i + "" + j));
+                        parsedRecord.getRecord().put("alarm_description", alarmMap.get("200" + i + "" + j));
+                        parsedRecords.add(parsedRecord);
+                    }
+                }
+            }
+        }
+        index = str.indexOf("&W");
+        if (index > 0) {
+            index += 2;
+            for (int i = 0; i < 3; i++) {
+                for (int j = 0; j < 4; j++) {
+                    int k = bs[index + i] & ((byte) (0x1 << j));
+                    if (k != 0) {
+                        ParsedRecord parsedRecord = createParsedRecord(bs,utc_time);
+                        parsedRecord.getRecord().put("alarm_type", "300" + i + "" + j);
+                        parsedRecord.getRecord().put("alarm_description", alarmMap.get("300" + i + "" + j));
+                        parsedRecords.add(parsedRecord);
+                    }
+                }
+            }
+            if (bs.length-1 > index+3 && Character.isDigit(bs[index+3])){
+                int k = bs[index + 3] & ((byte) (0x1));
+                if (k != 0){
+                    ParsedRecord parsedRecord = createParsedRecord(bs,utc_time);
+                    parsedRecord.getRecord().put("alarm_type", alarmMap.get("30030"));
+                    parsedRecord.getRecord().put("alarm_description", alarmMap.get("30030"));
+                    parsedRecords.add(parsedRecord);
+                }
+            }
+        }
+        list.addAll(parsedRecords);
+    }
+
+    private ParsedRecord createParsedRecord(byte[] bs, Date utc_time){
+        ParsedRecord parsedRecord = new ParsedRecord("vk_alarm");
+        Map<String, Object> map = parsedRecord.getRecord();
+
+        map.put("device_id", readDeviceId(bs));
+        if (utc_time != null) {
+            map.put("utc_time", utc_time);
+        }
+        map.put("collection_time", new Date());
+        return parsedRecord;
+    }
 
 }
 

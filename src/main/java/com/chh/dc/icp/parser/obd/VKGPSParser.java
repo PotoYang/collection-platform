@@ -29,7 +29,7 @@ public class VKGPSParser extends AbstractParser {
     private List<ParsedRecord> list = null;
 
     {
-        typeReaderMap.put("A",new StastatusReader());
+        typeReaderMap.put("A",new CanReader());
         typeReaderMap.put("B",new LocateReader());
         typeReaderMap.put("D",new DynamicLoadReader());
         typeReaderMap.put("O",new OBDReader());
