@@ -147,5 +147,31 @@ public class ByteReaderUtil {
         return rs;
     }
 
+    /**
+     * 读取ascii编码的两个字节数字
+     *
+     * @param bs
+     * @param start
+     * @return
+     */
+    public static int readAscii2byte(byte[] bs, int start) {
+        // 十位
+        int ten = bs[start] & 0xff - '0';
+        // bit
+        int bit = bs[start + 1] & 0xff - '0';
+        return ten * 10 + bit;
+    }
+
+    /**
+     * 读取两个ascii编码的两个字节所代表的int
+     *
+     * @param bs
+     * @param start
+     * @return
+     */
+    public static int readIntU16(byte[] bs, int start) {
+        return (bs[start] - '0') * 10 + (bs[start + 1] - '0');
+    }
+
 
 }

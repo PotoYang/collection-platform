@@ -140,7 +140,7 @@ public class DeviceDAO {
         try {
             con = dataSource.getConnection();
             String sql = "select warning_type, count(warning_type) as num from t_device_warning "
-                    + "where device_uid=? and warning_time>=? and warning_time<=? "
+                    + "where device_id=? and warning_time>=? and warning_time<=? "
                     + "and warning_type in(2,21,22,60,66,67,100,27,8,11)  group by warning_type ";
             ps = con.prepareStatement(sql);
             ps.setString(1, deviceUID);

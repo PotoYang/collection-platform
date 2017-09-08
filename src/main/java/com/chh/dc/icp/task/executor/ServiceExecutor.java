@@ -53,6 +53,7 @@ public class ServiceExecutor extends AbstractExecutor {
                 LOG.error(logHead + "解析数据源出错:" + data.getDesc(), e);
             }
         }
+        // forever not here?
         repository.commit();
         LOG.info(logHead + "任务采集解析完毕");
     }

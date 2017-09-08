@@ -28,7 +28,7 @@ public class OBDAlarmCodeConverter {
     public static void loadData() {
         loadDtcToCache();
         loadWarningToCache();
-        //loadPidThresholdToCache();
+        loadPidThresholdToCache();
     }
 
     static {

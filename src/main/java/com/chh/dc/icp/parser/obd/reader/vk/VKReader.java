@@ -146,73 +146,73 @@ public abstract class VKReader extends ByteArrayReader {
             map.put("collection_time", new Date());
 
 
-            map.put("BS00", (bs[index] & 0x01 - '0'));
-            map.put("BS01", (bs[index] & 0x02 - '0'));
-            map.put("BS02", (bs[index] & 0x04 - '0'));
-            map.put("BS03", (bs[index] & 0x08 - '0'));
+            map.put("bs00", (bs[index] & 0x01 - '0'));
+            map.put("bs01", (bs[index] & 0x02 - '0'));
+            map.put("bs02", (bs[index] & 0x04 - '0'));
+            map.put("bs03", (bs[index] & 0x08 - '0'));
             index++;
 
 
-            map.put("BS10", (bs[index] & 0x01 - '0'));
-            map.put("BS11", (bs[index] & 0x02 - '0'));
-            map.put("BS12", (bs[index] & 0x04 - '0'));
-            map.put("BS13", (bs[index] & 0x08 - '0'));
+            map.put("bs10", (bs[index] & 0x01 - '0'));
+            map.put("bs11", (bs[index] & 0x02 - '0'));
+            map.put("bs12", (bs[index] & 0x04 - '0'));
+            map.put("bs13", (bs[index] & 0x08 - '0'));
             index++;
 
-            map.put("BS20", (bs[index] & 0x01 - '0'));
-            map.put("BS212", (bs[index] & 0x06 - '0'));
-            map.put("BS23", (bs[index] & 0x08 - '0'));
+            map.put("bs20", (bs[index] & 0x01 - '0'));
+            map.put("bs212", (bs[index] & 0x06 - '0'));
+            map.put("bs23", (bs[index] & 0x08 - '0'));
             index++;
 
-            map.put("BS30", (bs[index] & 0x01 - '0'));
-            map.put("BS31", (bs[index] & 0x02 - '0'));
-            map.put("BS32", (bs[index] & 0x04 - '0'));
-            map.put("BS33", (bs[index] & 0x08 - '0'));
+            map.put("bs30", (bs[index] & 0x01 - '0'));
+            map.put("bs31", (bs[index] & 0x02 - '0'));
+            map.put("bs32", (bs[index] & 0x04 - '0'));
+            map.put("bs33", (bs[index] & 0x08 - '0'));
             index++;
 
-            map.put("BS40", (bs[index] & 0x01 - '0'));
-            map.put("BS41", (bs[index] & 0x02 - '0'));
-            map.put("BS42", (bs[index] & 0x04 - '0'));
-            map.put("BS43", (bs[index] & 0x08 - '0'));
+            map.put("bs40", (bs[index] & 0x01 - '0'));
+            map.put("bs41", (bs[index] & 0x02 - '0'));
+            map.put("bs42", (bs[index] & 0x04 - '0'));
+            map.put("bs43", (bs[index] & 0x08 - '0'));
             index++;
         }
         index = str.indexOf("&H");
         if (index > 0) {
-            map.put("HS00", (bs[index] & 0x01 - '0'));
-            map.put("HS01", (bs[index] & 0x02 - '0'));
-            map.put("HS02", (bs[index] & 0x04 - '0'));
-            map.put("HS03", (bs[index] & 0x08 - '0'));
-            map.put("HS04", (bs[index] >> 4 & 0x01 - '0'));
-            map.put("HS05", (bs[index] >> 4 & 0x02 - '0'));
-            map.put("HS06", (bs[index] >> 4 & 0x04 - '0'));
-            map.put("HS07", (bs[index] >> 4 & 0x08 - '0'));
+            map.put("hs00", (bs[index] & 0x01 - '0'));
+            map.put("hs01", (bs[index] & 0x02 - '0'));
+            map.put("hs02", (bs[index] & 0x04 - '0'));
+            map.put("hs03", (bs[index] & 0x08 - '0'));
+            map.put("hs04", (bs[index] >> 4 & 0x01 - '0'));
+            map.put("hs05", (bs[index] >> 4 & 0x02 - '0'));
+            map.put("hs06", (bs[index] >> 4 & 0x04 - '0'));
+            map.put("hs07", (bs[index] >> 4 & 0x08 - '0'));
             index++;
 
-            map.put("HS10", (bs[index] & 0x01 - '0'));
-            map.put("HS11", (bs[index] & 0x02 - '0'));
-            map.put("HS12", (bs[index] & 0x04 - '0'));
-            map.put("HS13", (bs[index] & 0x08 - '0'));
-            map.put("HS14", (bs[index] >> 4 & 0x01 - '0'));
-            map.put("HS15", (bs[index] >> 4 & 0x02 - '0'));
+            map.put("hs10", (bs[index] & 0x01 - '0'));
+            map.put("hs11", (bs[index] & 0x02 - '0'));
+            map.put("hs12", (bs[index] & 0x04 - '0'));
+            map.put("hs13", (bs[index] & 0x08 - '0'));
+            map.put("hs14", (bs[index] >> 4 & 0x01 - '0'));
+            map.put("hs15", (bs[index] >> 4 & 0x02 - '0'));
             index++;
 
-            map.put("HS20", (bs[index] & 0x01 - '0'));
-            map.put("HS21", (bs[index] & 0x02 - '0'));
-            map.put("HS22", (bs[index] & 0x04 - '0'));
-            map.put("HS23", (bs[index] & 0x08 - '0'));
-            map.put("HS24", (bs[index] >> 4 & 0x01 - '0'));
-            map.put("HS25", (bs[index] >> 4 & 0x02 - '0'));
-            map.put("HS26", (bs[index] >> 4 & 0x04 - '0'));
-            map.put("HS27", (bs[index] >> 4 & 0x08 - '0'));
+            map.put("hs20", (bs[index] & 0x01 - '0'));
+            map.put("hs21", (bs[index] & 0x02 - '0'));
+            map.put("hs22", (bs[index] & 0x04 - '0'));
+            map.put("hs23", (bs[index] & 0x08 - '0'));
+            map.put("hs24", (bs[index] >> 4 & 0x01 - '0'));
+            map.put("hs25", (bs[index] >> 4 & 0x02 - '0'));
+            map.put("hs26", (bs[index] >> 4 & 0x04 - '0'));
+            map.put("hs27", (bs[index] >> 4 & 0x08 - '0'));
             index++;
 
-            map.put("HS30", (bs[index] & 0x01 - '0'));
-            map.put("HS31", (bs[index] & 0x02 - '0'));
-            map.put("HS32", (bs[index] & 0x04 - '0'));
-            map.put("HS33", (bs[index] & 0x08 - '0'));
-            map.put("HS34", (bs[index] >> 4 & 0x01 - '0'));
-            map.put("HS35", (bs[index] >> 4 & 0x02 - '0'));
-            map.put("HS36", (bs[index] >> 4 & 0x04 - '0'));
+            map.put("hs30", (bs[index] & 0x01 - '0'));
+            map.put("hs31", (bs[index] & 0x02 - '0'));
+            map.put("hs32", (bs[index] & 0x04 - '0'));
+            map.put("hs33", (bs[index] & 0x08 - '0'));
+            map.put("hs34", (bs[index] >> 4 & 0x01 - '0'));
+            map.put("hs35", (bs[index] >> 4 & 0x02 - '0'));
+            map.put("hs36", (bs[index] >> 4 & 0x04 - '0'));
             index++;
         }
         index = str.indexOf("&C");

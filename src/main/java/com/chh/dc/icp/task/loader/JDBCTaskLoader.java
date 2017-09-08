@@ -37,6 +37,7 @@ public class JDBCTaskLoader extends TaskLoader {
 
     /**
      * 每隔一段时间从数据库加载数据(任务)
+     * taskInfoDao => taskQueue
      */
     @Override
     public void loadTask() {

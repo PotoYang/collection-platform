@@ -88,7 +88,7 @@ public abstract class TaskLoader extends Thread {
          * 如果队列满了，则会被阻塞直到队列有空间时再添加.
          * </p>
          *
-         * @param task 任务{@link Task}
+         * @param task 任务{@link task}
          * @throws InterruptedException if interrupted while waiting
          */
         public void put(TaskInfo task) throws InterruptedException {

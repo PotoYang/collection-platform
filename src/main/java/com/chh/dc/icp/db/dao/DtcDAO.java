@@ -99,6 +99,26 @@ public class DtcDAO {
         return list;
     }
 
+    public Map<Integer,String> getAlarmDtc() throws Exception {
+        Map<Integer,String>  alarmMap = new HashMap<>();
+        Connection connection = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        try {
+            connection = dataSource.getConnection();
+            String sql = "select * from t_vk_alarm_map";
+            ps = connection.prepareStatement(sql);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                alarmMap.put(rs.getInt("id"),rs.getString("desc"));
+            }
+        } finally {
+            DBUtil.close(rs, ps, connection);
+        }
+        return alarmMap;
+    }
+
+
     public DataSource getDataSource() {
         return dataSource;
     }

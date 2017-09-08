@@ -97,12 +97,20 @@ public class TaskManager extends Thread {
                     log.debug("任务已经在运行中. [task-name={}]", taskInfo.getName());
                     continue;
                 }
+
+                // 根据任务info的类型，选取对应的执行器
                 AbstractExecutor executor = ExecutorFactory.getExecutor(taskInfo);
-                //从warehouse申请仓库，如果仓库已经存在，则返回已经存在的实例
+
+                //从warehouse申请仓库，如果仓库已经存在，则返回已经存在的实例    单例实现
                 WareHouse wareHouse = GenericWareHouse.getInstance();
+
+                // 封装 仓库参数
                 RepositoryArgs repositoryArgs = new RepositoryArgs();
                 repositoryArgs.setTaskInfo(taskInfo);
+
+                // apply 仓库
                 Repository repository = wareHouse.apply(repositoryArgs);
+
                 executor.setRepository(repository);
                 // 设置任务本次启动时间
                 service.submit(executor);
@@ -125,6 +133,12 @@ public class TaskManager extends Thread {
         return workingTasks.containsKey(task.getId());
     }
 
+    /**
+     * 初始化函数
+     * 1. 加载任务线程 taskLoader
+     * 2. 处理任务线程 listener
+     * 3. 加载所需数据
+     */
     private void initialize() {
         taskLoader.start();
         threadPool = Executors.newFixedThreadPool(10);
