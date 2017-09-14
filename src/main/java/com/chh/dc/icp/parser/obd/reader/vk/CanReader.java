@@ -1,8 +1,11 @@
 package com.chh.dc.icp.parser.obd.reader.vk;
 
+import com.chh.dc.icp.Runner;
+import com.chh.dc.icp.db.dao.DtcDAO;
 import com.chh.dc.icp.warehouse.ParsedRecord;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -16,7 +19,6 @@ import java.util.Map;
  */
 public class CanReader extends VKReader {
     private static final Logger LOG = LoggerFactory.getLogger(CanReader.class);
-
 
     @Override
     public List<ParsedRecord> readRecord(byte[] bs) throws Exception {
@@ -88,7 +90,7 @@ public class CanReader extends VKReader {
 
         map.put("device_id", readDeviceId(bs));
         if (date != null) {
-            map.put("utc_time", date);
+            map.put("utctime", date);
         }
         map.put("collection_time", new Date());
 

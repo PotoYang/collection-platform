@@ -20,27 +20,27 @@ import java.util.Map;
  */
 public class VKGPSParser extends AbstractParser {
 
-    public static final Logger log = LoggerFactory.getLogger(HTWXSmart424Parser.class);
+    public static final Logger log = LoggerFactory.getLogger(VKGPSParser.class);
 
     /**
      * 功能类型  对应reader
      */
-    private Map<String, ByteArrayReader> typeReaderMap = new HashMap();
+    private Map<Character, ByteArrayReader> typeReaderMap = new HashMap();
     private List<ParsedRecord> list = null;
 
     {
-        typeReaderMap.put("A",new CanReader());
-        typeReaderMap.put("B",new LocateReader());
-        typeReaderMap.put("D",new DynamicLoadReader());
-        typeReaderMap.put("O",new OBDReader());
-        typeReaderMap.put("G",new PhraseInfoReader());
+        typeReaderMap.put('A',new CanReader());
+        typeReaderMap.put('B',new LocateReader());
+        typeReaderMap.put('D',new DynamicLoadReader());
+        typeReaderMap.put('O',new OBDReader());
+        typeReaderMap.put('G',new PhraseInfoReader());
     }
 
     @Override
     public void parse(TaskInfo taskInfo, DataPackage data) throws Exception {
         byte[] bs = (byte[]) data.getData();
 
-        String featureId = VKReader.readFeatureId(bs);
+        char featureId = VKReader.readFeatureId(bs);
         log.info("收取到VK数据，判断得到功能类型编码为{}", featureId);
         ByteArrayReader reader = typeReaderMap.get(featureId);
         if (reader == null) {
@@ -53,7 +53,12 @@ public class VKGPSParser extends AbstractParser {
 
     @Override
     public ParsedRecord readRecord() throws Exception {
-        return null;
+        if (list == null || list.isEmpty()) {
+            return null;
+        }
+        //只能读取一次
+        ParsedRecord record = list.remove(0);
+        return record;
     }
 
     @Override

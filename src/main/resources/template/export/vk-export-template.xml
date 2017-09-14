@@ -20,7 +20,7 @@
         <columns>
             <column name="device_id"/>
             <column name="collection_time"/>
-            <column name="utc_time"/>
+            <column name="utctime"/>
             <column name="latitude"/>
             <column name="longitude"/>
             <column name="latitude_flag"/>
@@ -36,14 +36,8 @@
             <column name="id"/>
             <column name="device_id"/>
             <column name="collection_time"/>
-            <column name="utc_time"/>
-            <column name="latitude"/>
-            <column name="longitude"/>
-            <column name="latitude_flag"/>
-            <column name="longitude_flag"/>
-            <column name="located"/>
-            <column name="speed"/>
-            <column name="direction"/>
+            <column name="utctime"/>
+
             <column name="bs00"/>
             <column name="bs01"/>
             <column name="bs03"/>
@@ -111,8 +105,8 @@
         <table name="t_vk_alarm"/>
         <columns>
             <column name="device_id"/>
-            <column name="utc_time"/>
             <column name="collection_time"/>
+            <column name="utctime"/>
             <column name="alarm_type"/>
             <column name="alarm_description"/>
         </columns>

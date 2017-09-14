@@ -91,13 +91,27 @@
     </bean>
 
     <bean id="test_redis" class="com.chh.dc.icp.util.redis.JedisFactory" scope="singleton" init-method="initPool">
-        <property name="host" value="localhost"/>
-        <property name="port" value="6379"/>
-        <property name="timeout" value="3000"/>
-        <property name="maxWaitMills" value="20000"/>
-        <property name="maxTotal" value="30"/>
-        <property name="maxIdle" value="5"/>
+        <!--<property name="host" value="localhost"/>-->
+        <!--<property name="port" value="6379"/>-->
+        <!--<property name="timeout" value="3000"/>-->
+        <!--<property name="maxWaitMills" value="20000"/>-->
+        <!--<property name="maxTotal" value="30"/>-->
+        <!--<property name="maxIdle" value="5"/>-->
         <!--<property name="password" value=""/>-->
+
+        <property name="host" value="123.249.3.137"/>
+        <property name="port" value="6279"/>
+        <property name="timeout" value="1000"/>
+        <property name="maxWaitMills" value="10000"/>
+        <property name="maxTotal" value="300"/>
+        <property name="maxIdle" value="500"/>
+        <property name="password" value="chh123"/>
+        <property name="maxActive" value="300"/>
+        <property name="leftMaxTime" value="0"/>
+        <property name="enRedisable" value="true"/>
+
     </bean>
+
+
 
 </beans>

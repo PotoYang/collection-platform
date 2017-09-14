@@ -12,15 +12,51 @@ import java.util.*;
  */
 public abstract class VKReader extends ByteArrayReader {
 
-    protected static DtcDAO dtcDao = new DtcDAO();
 
-    protected static Map<Integer, String> alarmMap;
+    protected static Map<Integer, String> alarmMap = new HashMap<>();
+    static {
+        alarmMap.put (10000, "防拆报警");
+        alarmMap.put (10001, "见光报警");
+        alarmMap.put (10002, "磁控报警");
+        alarmMap.put (10003, "蓝牙断开链接报警");
+        alarmMap.put (20000, "紧急报警/SOS/劫警");
+        alarmMap.put (20001, "盗警/非法进入报警");
+        alarmMap.put (20002, "震动报警");
+        alarmMap.put (20003, "碰撞报警");
+        alarmMap.put (20010, "进范围报警");
+        alarmMap.put (20011, "出范围报警");
+        alarmMap.put (20012, "超速报警");
+        alarmMap.put (20013, "偏离路线报警");
+        alarmMap.put (20020, "非法时段行驶报警");
+        alarmMap.put (20021, "停车休息时间不足报警");
+        alarmMap.put (20022, "位移报警/非法移动报警/越站报警");
+        alarmMap.put (20023, "非法开车门");
+        alarmMap.put (20030, "暗锁报警");
+        alarmMap.put (20031, "断电报警/剪线报警");
+        alarmMap.put (20032, "外部电瓶电压低报警");
+        alarmMap.put (20033, "推车报警");
+        alarmMap.put (20040, "停车未熄火报警/禁行报警");
+        alarmMap.put (20041, "急加速报警（OBD）");
+        alarmMap.put (20042, "急减速报警（OBD）");
+        alarmMap.put (20043, "冷却液温度过高报警（OBD）");
+        alarmMap.put (30000, "光感报警");
+        alarmMap.put (30001, "磁感报警");
+        alarmMap.put (30002, "防拆报警");
+        alarmMap.put (30003, "充电过压报警");
+        alarmMap.put (30010, "锁头报警/非法启动报警");
+        alarmMap.put (30011, "侧翻报警");
+        alarmMap.put (30012, "电源接触不良报警");
+        alarmMap.put (30013, "内部电池低电压报警");
+        alarmMap.put (30020, "防屏蔽报警");
+        alarmMap.put (30021, "蓝牙防丢报警");
+        alarmMap.put (30022, "电池电源不足关机报警");
+        alarmMap.put (30023, "屏蔽断油报警");
+        alarmMap.put (30030, "急转弯报警");
+    }
 
     protected int index = INDEX_DATA;
 
-    public void init() throws Exception {
-        alarmMap = dtcDao.getAlarmDtc();
-    }
+
 
     /**
      * MG20{}  从第6位开始是id
@@ -56,9 +92,9 @@ public abstract class VKReader extends ByteArrayReader {
      * @param bs
      * @return
      */
-    public static String readFeatureId(byte[] bs) {
+    public static char readFeatureId(byte[] bs) {
         int index = 22;
-        return String.valueOf(bs[index]);
+        return (char)bs[index];
     }
 
 
@@ -108,9 +144,9 @@ public abstract class VKReader extends ByteArrayReader {
         if (bs.length < start + 8) {
             return 0.0;
         }
-        double degree = (bs[start] - '0') * 100 + (bs[start + 1] - '0') * 10 + (bs[start + 2] - '0');
-        double decimal = (bs[start + 3] - '0') * 10 + (bs[start + 4] - '0') + (bs[start + 5] - '0') * 0.1 +
-                (bs[start + 6] - '0') * 0.01 + (bs[start + 7] - '0') * 0.01 + (bs[start + 8] - '0') * 0.001;
+        double degree = (bs[start] ) * 100 + (bs[start + 1] ) * 10 + (bs[start + 2] );
+        double decimal = (bs[start + 3] ) * 10 + (bs[start + 4] ) + (bs[start + 5] ) * 0.1 +
+                (bs[start + 6] ) * 0.01 + (bs[start + 7] ) * 0.01 + (bs[start + 8] ) * 0.001;
 
         return degree + decimal / 60.0;
     }
@@ -124,9 +160,9 @@ public abstract class VKReader extends ByteArrayReader {
      * @return
      */
     private double readLatitude(byte[] bs, int start) {
-        double degree = (bs[start] - '0') * 10 + (bs[start + 1] - '0');
-        double decimal = (bs[start + 2] - '0') * 10 + (bs[start + 3] - '0') + (bs[start + 4] - '0') * 0.1 +
-                (bs[start + 5] - '0') * 0.01 + (bs[start + 6] - '0') * 0.01 + (bs[start + 7] - '0') * 0.001;
+        double degree = (bs[start] ) * 10 + (bs[start + 1] );
+        double decimal = (bs[start + 2] ) * 10 + (bs[start + 3] ) + (bs[start + 4] ) * 0.1 +
+                (bs[start + 5] ) * 0.01 + (bs[start + 6] ) * 0.01 + (bs[start + 7] ) * 0.001;
 
         return degree + decimal / 60.0;
     }
@@ -141,78 +177,78 @@ public abstract class VKReader extends ByteArrayReader {
 
             map.put("device_id", readDeviceId(bs));
             if (date != null) {
-                map.put("utc_time", date);
+                map.put("utctime", date);
             }
             map.put("collection_time", new Date());
 
 
-            map.put("bs00", (bs[index] & 0x01 - '0'));
-            map.put("bs01", (bs[index] & 0x02 - '0'));
-            map.put("bs02", (bs[index] & 0x04 - '0'));
-            map.put("bs03", (bs[index] & 0x08 - '0'));
+            map.put("bs00", (bs[index] & 0x01 ));
+            map.put("bs01", (bs[index] & 0x02 ));
+            map.put("bs02", (bs[index] & 0x04 ));
+            map.put("bs03", (bs[index] & 0x08 ));
             index++;
 
 
-            map.put("bs10", (bs[index] & 0x01 - '0'));
-            map.put("bs11", (bs[index] & 0x02 - '0'));
-            map.put("bs12", (bs[index] & 0x04 - '0'));
-            map.put("bs13", (bs[index] & 0x08 - '0'));
+            map.put("bs10", (bs[index] & 0x01 ));
+            map.put("bs11", (bs[index] & 0x02 ));
+            map.put("bs12", (bs[index] & 0x04 ));
+            map.put("bs13", (bs[index] & 0x08 ));
             index++;
 
-            map.put("bs20", (bs[index] & 0x01 - '0'));
-            map.put("bs212", (bs[index] & 0x06 - '0'));
-            map.put("bs23", (bs[index] & 0x08 - '0'));
+            map.put("bs20", (bs[index] & 0x01 ));
+            map.put("bs212", (bs[index] & 0x06 ));
+            map.put("bs23", (bs[index] & 0x08 ));
             index++;
 
-            map.put("bs30", (bs[index] & 0x01 - '0'));
-            map.put("bs31", (bs[index] & 0x02 - '0'));
-            map.put("bs32", (bs[index] & 0x04 - '0'));
-            map.put("bs33", (bs[index] & 0x08 - '0'));
+            map.put("bs30", (bs[index] & 0x01 ));
+            map.put("bs31", (bs[index] & 0x02 ));
+            map.put("bs32", (bs[index] & 0x04 ));
+            map.put("bs33", (bs[index] & 0x08 ));
             index++;
 
-            map.put("bs40", (bs[index] & 0x01 - '0'));
-            map.put("bs41", (bs[index] & 0x02 - '0'));
-            map.put("bs42", (bs[index] & 0x04 - '0'));
-            map.put("bs43", (bs[index] & 0x08 - '0'));
+            map.put("bs40", (bs[index] & 0x01 ));
+            map.put("bs41", (bs[index] & 0x02 ));
+            map.put("bs42", (bs[index] & 0x04 ));
+            map.put("bs43", (bs[index] & 0x08 ));
             index++;
         }
         index = str.indexOf("&H");
         if (index > 0) {
-            map.put("hs00", (bs[index] & 0x01 - '0'));
-            map.put("hs01", (bs[index] & 0x02 - '0'));
-            map.put("hs02", (bs[index] & 0x04 - '0'));
-            map.put("hs03", (bs[index] & 0x08 - '0'));
-            map.put("hs04", (bs[index] >> 4 & 0x01 - '0'));
-            map.put("hs05", (bs[index] >> 4 & 0x02 - '0'));
-            map.put("hs06", (bs[index] >> 4 & 0x04 - '0'));
-            map.put("hs07", (bs[index] >> 4 & 0x08 - '0'));
+            map.put("hs00", (bs[index] & 0x01 ));
+            map.put("hs01", (bs[index] & 0x02 ));
+            map.put("hs02", (bs[index] & 0x04 ));
+            map.put("hs03", (bs[index] & 0x08 ));
+            map.put("hs04", (bs[index] >> 4 & 0x01 ));
+            map.put("hs05", (bs[index] >> 4 & 0x02 ));
+            map.put("hs06", (bs[index] >> 4 & 0x04 ));
+            map.put("hs07", (bs[index] >> 4 & 0x08 ));
             index++;
 
-            map.put("hs10", (bs[index] & 0x01 - '0'));
-            map.put("hs11", (bs[index] & 0x02 - '0'));
-            map.put("hs12", (bs[index] & 0x04 - '0'));
-            map.put("hs13", (bs[index] & 0x08 - '0'));
-            map.put("hs14", (bs[index] >> 4 & 0x01 - '0'));
-            map.put("hs15", (bs[index] >> 4 & 0x02 - '0'));
+            map.put("hs10", (bs[index] & 0x01 ));
+            map.put("hs11", (bs[index] & 0x02 ));
+            map.put("hs12", (bs[index] & 0x04 ));
+            map.put("hs13", (bs[index] & 0x08 ));
+            map.put("hs14", (bs[index] >> 4 & 0x01 ));
+            map.put("hs15", (bs[index] >> 4 & 0x02 ));
             index++;
 
-            map.put("hs20", (bs[index] & 0x01 - '0'));
-            map.put("hs21", (bs[index] & 0x02 - '0'));
-            map.put("hs22", (bs[index] & 0x04 - '0'));
-            map.put("hs23", (bs[index] & 0x08 - '0'));
-            map.put("hs24", (bs[index] >> 4 & 0x01 - '0'));
-            map.put("hs25", (bs[index] >> 4 & 0x02 - '0'));
-            map.put("hs26", (bs[index] >> 4 & 0x04 - '0'));
-            map.put("hs27", (bs[index] >> 4 & 0x08 - '0'));
+            map.put("hs20", (bs[index] & 0x01 ));
+            map.put("hs21", (bs[index] & 0x02 ));
+            map.put("hs22", (bs[index] & 0x04 ));
+            map.put("hs23", (bs[index] & 0x08 ));
+            map.put("hs24", (bs[index] >> 4 & 0x01 ));
+            map.put("hs25", (bs[index] >> 4 & 0x02 ));
+            map.put("hs26", (bs[index] >> 4 & 0x04 ));
+            map.put("hs27", (bs[index] >> 4 & 0x08 ));
             index++;
 
-            map.put("hs30", (bs[index] & 0x01 - '0'));
-            map.put("hs31", (bs[index] & 0x02 - '0'));
-            map.put("hs32", (bs[index] & 0x04 - '0'));
-            map.put("hs33", (bs[index] & 0x08 - '0'));
-            map.put("hs34", (bs[index] >> 4 & 0x01 - '0'));
-            map.put("hs35", (bs[index] >> 4 & 0x02 - '0'));
-            map.put("hs36", (bs[index] >> 4 & 0x04 - '0'));
+            map.put("hs30", (bs[index] & 0x01 ));
+            map.put("hs31", (bs[index] & 0x02 ));
+            map.put("hs32", (bs[index] & 0x04 ));
+            map.put("hs33", (bs[index] & 0x08 ));
+            map.put("hs34", (bs[index] >> 4 & 0x01 ));
+            map.put("hs35", (bs[index] >> 4 & 0x02 ));
+            map.put("hs36", (bs[index] >> 4 & 0x04 ));
             index++;
         }
         index = str.indexOf("&C");
@@ -288,7 +324,7 @@ public abstract class VKReader extends ByteArrayReader {
 
         parsedRecord.getRecord().put("device_id", readDeviceId(bs));
         parsedRecord.getRecord().put("collection_time", new Date());
-        parsedRecord.getRecord().put("utc_time", date);
+        parsedRecord.getRecord().put("utctime", date);
         parsedRecord.getRecord().put("latitude", latitude);
         parsedRecord.getRecord().put("longitude", longitude);
         parsedRecord.getRecord().put("latitude_flag", latitudeFlag);
@@ -309,10 +345,10 @@ public abstract class VKReader extends ByteArrayReader {
 
     private void parseF_speed(Map<String, Object> map, byte[] bs, int index) {
         index += 2;
-        int hundred = bs[index] - '0';
-        int ten = bs[index + 1] - '0';
-        int bit = bs[index + 2] - '0';
-        int decimal = bs[index + 3] - '0';
+        int hundred = bs[index] ;
+        int ten = bs[index + 1] ;
+        int bit = bs[index + 2] ;
+        int decimal = bs[index + 3] ;
         // 单位 节
         double speed = hundred * 100 + ten * 10 + bit + decimal * 0.1;
         // 单位  km
@@ -324,7 +360,7 @@ public abstract class VKReader extends ByteArrayReader {
         index += 2;
         String strHeight = new String(bs, index, 5);
         int intHeight = Integer.parseInt(strHeight);
-        double height = intHeight + 0.1 * (bs[index + 5] - '0');
+        double height = intHeight + 0.1 * (bs[index + 5] );
         if (height > 20000) {
             height = -height;
         }
@@ -363,6 +399,7 @@ public abstract class VKReader extends ByteArrayReader {
     }
 
     protected void parseAlarm(List<ParsedRecord> list, String str, byte[] bs, Date utc_time) {
+
         List<ParsedRecord> parsedRecords = new ArrayList<>();
         int index = str.indexOf("&B");
         if (index > 0) {
@@ -412,7 +449,7 @@ public abstract class VKReader extends ByteArrayReader {
 
         map.put("device_id", readDeviceId(bs));
         if (utc_time != null) {
-            map.put("utc_time", utc_time);
+            map.put("utctime", utc_time);
         }
         map.put("collection_time", new Date());
         return parsedRecord;
