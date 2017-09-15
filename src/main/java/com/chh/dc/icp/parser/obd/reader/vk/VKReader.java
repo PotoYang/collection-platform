@@ -305,8 +305,8 @@ public abstract class VKReader extends ByteArrayReader {
         index += 9;
 
         int b = bs[index] & 0x08;
-        String latitudeFlag = (bs[index] & 0x04) == 0 ? "west" : "east";
-        String longitudeFlag = (bs[index] & 0x02) == 0 ? "south" : "north";
+        int latitudeFlag = (bs[index] & 0x04) == 0 ? -1 : 1;
+        int longitudeFlag = (bs[index] & 0x02) == 0 ? -1 : 1;
         String located = (bs[index] & 0x04) == 0 ? "true" : "false";
 
         int speed = ByteReaderUtil.readIntU16(bs, index);
@@ -325,10 +325,8 @@ public abstract class VKReader extends ByteArrayReader {
         parsedRecord.getRecord().put("device_id", readDeviceId(bs));
         parsedRecord.getRecord().put("collection_time", new Date());
         parsedRecord.getRecord().put("utctime", date);
-        parsedRecord.getRecord().put("latitude", latitude);
-        parsedRecord.getRecord().put("longitude", longitude);
-        parsedRecord.getRecord().put("latitude_flag", latitudeFlag);
-        parsedRecord.getRecord().put("longitude_flag", longitudeFlag);
+        parsedRecord.getRecord().put("latitude", latitude*latitudeFlag);
+        parsedRecord.getRecord().put("longitude", longitude*longitudeFlag);
         parsedRecord.getRecord().put("located", located);
         parsedRecord.getRecord().put("speed", speed);
         parsedRecord.getRecord().put("direction", direction);

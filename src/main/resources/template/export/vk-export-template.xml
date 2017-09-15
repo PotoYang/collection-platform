@@ -23,8 +23,6 @@
             <column name="utctime"/>
             <column name="latitude"/>
             <column name="longitude"/>
-            <column name="latitude_flag"/>
-            <column name="longitude_flag"/>
             <column name="located"/>
             <column name="speed"/>
             <column name="direction"/>
