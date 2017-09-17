@@ -72,4 +72,8 @@
         <option type="lpush"/>
     </export>
 
+    <export id="12011" dataType="htwx_gps" enable="true">
+        <key value="htwx_gps_fence"/>
+        <option type="lpush"/>
+    </export>
 </templates>
