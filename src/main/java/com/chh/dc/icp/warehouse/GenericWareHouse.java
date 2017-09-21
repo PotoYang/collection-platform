@@ -31,6 +31,7 @@ public class GenericWareHouse implements WareHouse {
     // 仓库容量管理
     protected Map<Long, Integer> workingRepositoryNum = new HashMap<Long, Integer>();
     protected Object warehouseLock = new Object();
+
     // 仓库缓存队列，使用ConcurrentHashMap保证并发
     private Map<Long, Repository> workingRepositories = new ConcurrentHashMap<Long, Repository>();
     private int currentWorkingRepositories = 0;

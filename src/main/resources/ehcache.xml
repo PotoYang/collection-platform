@@ -30,7 +30,7 @@
     <!-- 注意，以下缓存是永久有效，是系统初始化数据到缓存中，如果不需要永久有效，请另写，或在 -->
     <cache name="cache"
            maxEntriesLocalHeap="10000"
-           maxEntriesLocalDisk="1000"
+           maxEntriesLocalDisk="1"
            eternal="true"
            diskSpoolBufferSizeMB="20"
            timeToIdleSeconds="0"

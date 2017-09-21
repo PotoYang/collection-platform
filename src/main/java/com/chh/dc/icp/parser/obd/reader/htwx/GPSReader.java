@@ -34,6 +34,7 @@ public class GPSReader extends HTWXReader {
 
         Date last_accon_time = (Date) statDataMap.get("last_accon_time");
         Date utctime = (Date) statDataMap.get("utctime");
+
         //gpsdata
         List<ParsedRecord> gpsData = readGPSData(bs, index);
         if (gpsData != null && gpsData.size() > 0) {

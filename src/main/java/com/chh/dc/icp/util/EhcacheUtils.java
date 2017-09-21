@@ -105,6 +105,7 @@ public class EhcacheUtils {
         return cache;
     }
 
+
     /**
      * 添加缓存<br>
      * 注意，以下缓存是永久有效，是系统初始化数据到缓存中，<br>

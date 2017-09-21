@@ -9,6 +9,7 @@ import com.chh.dc.icp.db.pojo.TaskInfo;
 import com.chh.dc.icp.parser.AbstractParser;
 import com.chh.dc.icp.parser.obd.reader.ByteArrayReader;
 import com.chh.dc.icp.parser.obd.reader.htwx.SnapReader;
+import com.chh.dc.icp.util.OBDAlarmCodeConverter;
 import com.chh.dc.icp.warehouse.ParsedRecord;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

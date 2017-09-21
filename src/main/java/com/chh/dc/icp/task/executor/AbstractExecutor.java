@@ -177,9 +177,6 @@ public abstract class AbstractExecutor implements Callable<TaskFuture> {
 
     }
 
-    ;
-
-
     /**
      * @return the taskInfo
      */

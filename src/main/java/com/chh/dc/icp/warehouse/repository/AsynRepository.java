@@ -1,13 +1,13 @@
 package com.chh.dc.icp.warehouse.repository;
 
 import com.chh.dc.icp.db.pojo.TaskInfo;
-import com.chh.dc.icp.warehouse.exporter.AbstractExporter;
-import com.chh.dc.icp.warehouse.exporter.Exporter;
-import com.chh.dc.icp.warehouse.exporter.ExporterManager;
 import com.chh.dc.icp.util.ThreadUtil;
 import com.chh.dc.icp.warehouse.DataBlock;
 import com.chh.dc.icp.warehouse.ParsedRecord;
 import com.chh.dc.icp.warehouse.WarehouseReport;
+import com.chh.dc.icp.warehouse.exporter.AbstractExporter;
+import com.chh.dc.icp.warehouse.exporter.Exporter;
+import com.chh.dc.icp.warehouse.exporter.ExporterManager;
 import com.chh.dc.icp.warehouse.exporter.RandomAccessFilesExporter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -31,6 +31,7 @@ public class AsynRepository implements Repository {
 
     private long id; // 仓库ID
 
+    // 暂存？
     private Map<String, List<ParsedRecord>> tempRegisters = new ConcurrentHashMap<>();
 
     private List<Exporter> exports;
@@ -62,6 +63,8 @@ public class AsynRepository implements Repository {
 
     private int maxNum = 300;
 
+
+
     // BufferedMultiExportRepository和异步输出线程 锁
     private ReentrantLock lock = new ReentrantLock();
 
@@ -69,6 +72,7 @@ public class AsynRepository implements Repository {
     private Condition empty = lock.newCondition();
 
     private Condition full = lock.newCondition();
+
 
     // 数据提交标记
     private volatile boolean commitFlag = false;
@@ -85,6 +89,7 @@ public class AsynRepository implements Repository {
         //创建报告
         this.warehouseReport = new WarehouseReport();
         warehouseReport.setStartTime(new Date());
+
         //加载exporter和启动加载线程
         exporterManager = new ExporterManager(repositoryArgs.getTaskInfo());
         this.exports = exporterManager.getExporters();
@@ -343,7 +348,7 @@ public class AsynRepository implements Repository {
 
     class OverTimeCommitThread extends Thread {
 
-        private int overTimeMils = 10000;
+        private int overTimeMils = 10;
 
 
         @Override

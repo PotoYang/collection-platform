@@ -47,6 +47,6 @@ public abstract class ByteArrayReader {
         }
     }
 
-    abstract public List<ParsedRecord> readRecord(byte[] bs);
+    abstract public List<ParsedRecord> readRecord(byte[] bs) throws Exception;
 
 }
