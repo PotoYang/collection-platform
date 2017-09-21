@@ -55,7 +55,7 @@
 
     <!-- redisCache -->
     <bean name="redisCache" class="com.chh.dc.icp.util.redis.RedisCache">
-        <property name="jedisFactory" ref="test_redis"/>
+        <property name="jedisFactory" ref="redis"/>
     </bean>
 
 </beans>
