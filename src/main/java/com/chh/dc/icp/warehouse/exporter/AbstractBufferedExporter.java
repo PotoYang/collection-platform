@@ -84,6 +84,7 @@ public abstract class AbstractBufferedExporter extends AbstractExporter {
                 log.debug("输出异常", e);
                 this.setErrorCode(-1);
                 this.setCause(e.getMessage());
+                e.printStackTrace();
 //                this.close();
 //                break;
             } finally {

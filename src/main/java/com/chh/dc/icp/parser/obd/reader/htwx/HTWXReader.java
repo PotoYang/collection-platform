@@ -175,8 +175,8 @@ public abstract class HTWXReader extends ByteArrayReader {
         index += 4;
         double lon = ByteReaderUtil.readU32(bs, index, true) / 3600000.0;
         index += 4;
-        //speed cm/sec转成m/sec
-        map.put("speed", ByteReaderUtil.readU16(bs, index, true) / 100.0);
+        //speed cm/sec转成km/h
+        map.put("speed", ByteReaderUtil.readU16(bs, index, true) * 0.036);
         index += 2;
         //dir 1/10度转成度
         map.put("dir", ByteReaderUtil.readU16(bs, index, true) / 10.0);

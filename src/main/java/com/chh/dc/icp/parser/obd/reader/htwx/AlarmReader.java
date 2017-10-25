@@ -100,7 +100,6 @@ public class AlarmReader extends HTWXReader {
             ParsedRecord warningData = new ParsedRecord("htwx_warning_to_stat");
             Map<String, Object> warningMap = warningData.getRecord();
             warningMap.put("device_id", uid);
-            warningMap.put("device_id", deviceId);
             warningMap.put("last_accon_time", lastAcconTime);
             warningMap.put("last_accon_time_sec", lastAcconTimeSec);
             warningMap.put("utctime", utctime);
