@@ -255,4 +255,163 @@
         </columns>
     </export>
 
+    <export id="12007" type="jdbc_batch" dataType="htwx_stat" batchNumber="100" target="exportTarger" enable="true">
+        <table name="t_htwx_stat"/>
+        <columns>
+            <column name="device_id"/>
+            <column name="last_accon_time"/>
+            <column name="utctime"/>
+            <column name="total_trip_mileage"/>
+            <column name="current_trip_milea"/>
+            <column name="total_fuel"/>
+            <column name="current_fuel"/>
+            <column name="s07"/>
+            <column name="s06"/>
+            <column name="s05"/>
+            <column name="s04"/>
+            <column name="s03"/>
+            <column name="s02"/>
+            <column name="s01"/>
+            <column name="s00"/>
+            <column name="s17"/>
+            <column name="s16"/>
+            <column name="s15"/>
+            <column name="s14"/>
+            <column name="s13"/>
+            <column name="s12"/>
+            <column name="s11"/>
+            <column name="s10"/>
+            <column name="s27"/>
+            <column name="s26"/>
+            <column name="s25"/>
+            <column name="s24"/>
+            <column name="s23"/>
+            <column name="s22"/>
+            <column name="s21"/>
+            <column name="s20"/>
+            <column name="s37"/>
+            <column name="s36"/>
+            <column name="s35"/>
+            <column name="s34"/>
+            <column name="s33"/>
+            <column name="s32"/>
+            <column name="s31"/>
+            <column name="s30"/>
+            <column name="reserve"/>
+            <column name="collection_time"/>
+        </columns>
+    </export>
+
+    <export id="12008" type="jdbc_batch" dataType="htwx_can" batchNumber="100" target="exportTarger" enable="true">
+        <table name="t_htwx_can"/>
+        <columns>
+            <column name="device_id"/>
+            <column name="utctime"/>
+            <column name="collection_time"/>
+            <column name="f_2100"/>
+            <column name="f_2101"/>
+            <column name="f_2102"/>
+            <column name="f_2103"/>
+            <column name="f_2104"/>
+            <column name="f_2105"/>
+            <column name="f_2106"/>
+            <column name="f_2107"/>
+            <column name="f_2108"/>
+            <column name="f_2109"/>
+            <column name="f_210a"/>
+            <column name="f_210b"/>
+            <column name="f_210c"/>
+            <column name="f_210d"/>
+            <column name="f_210e"/>
+            <column name="f_210f"/>
+            <column name="f_2110"/>
+            <column name="f_2111"/>
+            <column name="f_2112"/>
+            <column name="f_2113"/>
+            <column name="f_2114"/>
+            <column name="f_2115"/>
+            <column name="f_2116"/>
+            <column name="f_2117"/>
+            <column name="f_2118"/>
+            <column name="f_2119"/>
+            <column name="f_211a"/>
+            <column name="f_211b"/>
+            <column name="f_211c"/>
+            <column name="f_211d"/>
+            <column name="f_211e"/>
+            <column name="f_211f"/>
+            <column name="f_2120"/>
+            <column name="f_2121"/>
+            <column name="f_2122"/>
+            <column name="f_2123"/>
+            <column name="f_2124"/>
+            <column name="f_2125"/>
+            <column name="f_2126"/>
+            <column name="f_2127"/>
+            <column name="f_2128"/>
+            <column name="f_2129"/>
+            <column name="f_212a"/>
+            <column name="f_212b"/>
+            <column name="f_212c"/>
+            <column name="f_212d"/>
+            <column name="f_212e"/>
+            <column name="f_212f"/>
+            <column name="f_2130"/>
+            <column name="f_2131"/>
+            <column name="f_2132"/>
+            <column name="f_2133"/>
+            <column name="f_2134"/>
+            <column name="f_2135"/>
+            <column name="f_2136"/>
+            <column name="f_2137"/>
+            <column name="f_2138"/>
+            <column name="f_2139"/>
+            <column name="f_213a"/>
+            <column name="f_213b"/>
+            <column name="f_213c"/>
+            <column name="f_213d"/>
+            <column name="f_213e"/>
+            <column name="f_213f"/>
+            <column name="f_2140"/>
+            <column name="f_2141"/>
+            <column name="f_2142"/>
+            <column name="f_2143"/>
+            <column name="f_2144"/>
+            <column name="f_2145"/>
+            <column name="f_2146"/>
+            <column name="f_2147"/>
+            <column name="f_2148"/>
+            <column name="f_2149"/>
+            <column name="f_214a"/>
+            <column name="f_214b"/>
+            <column name="f_214c"/>
+            <column name="f_214d"/>
+            <column name="f_214e"/>
+            <column name="f_214f"/>
+            <column name="f_2150"/>
+            <column name="f_2151"/>
+            <column name="f_2152"/>
+            <column name="f_2153"/>
+            <column name="f_2154"/>
+            <column name="f_2155"/>
+            <column name="f_2156"/>
+            <column name="f_2157"/>
+            <column name="f_2158"/>
+            <column name="f_2159"/>
+            <column name="f_215a"/>
+            <column name="f_215b"/>
+            <column name="f_215c"/>
+            <column name="f_215d"/>
+            <column name="f_215e"/>
+            <column name="f_2160"/>
+            <column name="f_2161"/>
+            <column name="f_2162"/>
+            <column name="f_2163"/>
+            <column name="f_2164"/>
+        </columns>
+    </export>
+
+
+
+
 </templates>
