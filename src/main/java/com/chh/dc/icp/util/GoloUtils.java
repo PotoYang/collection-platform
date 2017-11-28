@@ -111,15 +111,13 @@ public class GoloUtils {
             StringBuffer params = new StringBuffer("action=data_develop.get_devices_info");
             params.append("&app_id=").append(GoloUtils.appId);
             params.append("&develop_id=").append(GoloUtils.developId);
-            params.append("&devicesn=").append("972290015404");
-            params.append("&devicetype=golo3CU");
+            params.append("&devicesn=").append("972290022796");
+            params.append("&devicetype=GX");
             params.append("&time=").append(Long.toString(System.currentTimeMillis() / 1000));
             String signF = GoloUtils.generateSign(params.toString());
             params.append("&sign=").append(signF);
-//			MyHttpClient client = new MyHttpClient();
             JSONObject res = (JSONObject) MyHttpClient.getInstance().getJsonRequest(GoloUtils.baseUrl + params.toString());
             if (GoloUtils.ERR_CODE_SUCCESS == res.getInteger("code")) {
-//				JSONObject data = res.getJSONObject("data");
                 JSONArray data = res.getJSONArray("data");
             } else {
                 LOG.error("获取设备信息失败！！！！！,错误消息：" + res.toJSONString());
@@ -130,7 +128,8 @@ public class GoloUtils {
     }
 
 
-//	public static void main(String[] args){
-//		getDeviceInfo();
-//	}
+
+	public static void main(String[] args){
+        getDeviceInfo();
+	}
 }
