@@ -50,7 +50,7 @@
     <export id="12006" dataType="htwx_fault" enable="true">
         <key value="htwx_fault_code:{device_id}"/>
         <option type="zadd">
-            <score value="warning_time"/>
+            <score value="utctime"/>
         </option>
     </export>
     <!--  待汇总告警数据 -->

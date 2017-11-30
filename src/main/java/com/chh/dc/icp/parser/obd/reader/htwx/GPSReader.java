@@ -13,7 +13,6 @@ import com.chh.dc.icp.warehouse.ParsedRecord;
  */
 public class GPSReader extends HTWXReader {
 
-    private String deviceType = "3";
     private Integer gpsLocateModel = 1;
 
     /**

@@ -17,7 +17,6 @@ import com.chh.dc.icp.warehouse.ParsedRecord;
  * @Description: TODO
  */
 public class SnapReader extends HTWXReader {
-    private String deviceType = "3";
     private Map<String, FieldInfo> fieldMap = new HashMap<String, FieldInfo>();
 
     {

@@ -572,6 +572,7 @@ public class JDBCBatchExporter extends AbstractBufferedExporter {
 //            log.info("exportId：{}，提交了类型为{}的数据{}条", dbExportTemplate.getId(),dataType, this.currNum);
 //            this.currNum = 0;
             updateSuccNum();
+            DBUtil.close(null, statement, con);
         } catch (Exception e) {
 
 //            log.error("exportId：{}，{}条数据提交失败", dbExportTemplate.getId(),currNum,e);

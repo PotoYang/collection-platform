@@ -25,11 +25,11 @@
         <version.logback>1.1.7</version.logback>
         <version.commons-codec>1.9</version.commons-codec>
         <version.commons-io>2.0.1</version.commons-io>
-        <version.c3p0>0.9.1.2</version.c3p0>
         <version.dom4j>1.6</version.dom4j>
         <version.httpclient>4.5</version.httpclient>
         <version.httpmime>4.5.2</version.httpmime>
         <version.ehcache>2.5.0</version.ehcache>
+        <druid.version>1.0.9</druid.version>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
     </properties>
@@ -58,10 +58,11 @@
             <version>${version.logback}</version>
         </dependency>
         <dependency>
-            <groupId>c3p0</groupId>
-            <artifactId>c3p0</artifactId>
-            <version>${version.c3p0}</version>
+            <groupId>com.alibaba</groupId>
+            <artifactId>druid</artifactId>
+            <version>${druid.version}</version>
         </dependency>
+
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>

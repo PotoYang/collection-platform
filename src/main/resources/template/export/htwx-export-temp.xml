@@ -102,7 +102,7 @@
             <column name="last_accon_time"/>
         </columns>
     </export>
-    <export id="12006" type="jdbc_batch" dataType="htwx_fault" batchNumber="100" target="exportTarger" enable="true">
+    <export id="12006" type="jdbc_batch" dataType="htwx_fault" batchNumber="100" target="exportOBD" enable="true">
         <table name="t_device_trouble_code"/>
         <columns>
             <column name="dtc_vaule" property="fault_code"/>

@@ -43,7 +43,7 @@
         </rollingPolicy>
     </appender>
 
-    <logger name="com.tcl" level="debug"/>
+    <logger name="com.chh" level="info"/>
 
     <!-- 日志输出级别 -->
     <root level="info">

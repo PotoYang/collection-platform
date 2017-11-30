@@ -23,7 +23,6 @@ import org.slf4j.LoggerFactory;
  */
 public class AlarmReader extends HTWXReader {
     private static final Logger log = LoggerFactory.getLogger(AlarmReader.class);
-    private String deviceType = "3";
     private Integer gpsLocateModel = 1;
 
     @Override
