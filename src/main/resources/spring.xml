@@ -6,7 +6,7 @@
     <import resource="spring-datasource.xml"/>
 
     <bean id="taskInfoDAO" class="com.chh.dc.icp.db.dao.TaskInfoDAO">
-        <property name="dataSource" ref="mysql"/>
+        <property name="dataSource" ref="mysql_dc"/>
     </bean>
 
     <bean id="taskManager" class="com.chh.dc.icp.task.TaskManager">
@@ -49,7 +49,7 @@
         <property name="dataSource" ref="mysql"/>
     </bean>
     <bean id="dtcDAO" class="com.chh.dc.icp.db.dao.DtcDAO">
-        <property name="dataSource" ref="mysql"/>
+        <property name="dataSource" ref="mysql_dc"/>
     </bean>
     <bean id="OBDAlarmCodeConverter" class="com.chh.dc.icp.util.OBDAlarmCodeConverter">
         <property name="dtcDao" ref="dtcDAO"/>

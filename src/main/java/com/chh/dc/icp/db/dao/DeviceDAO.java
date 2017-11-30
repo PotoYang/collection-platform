@@ -111,7 +111,7 @@ public class DeviceDAO {
     }
 
     private String getCnlaunchSql(TaskInfo taskInfo) {
-        StringBuffer sb = new StringBuffer("select d.id ,y.vender_device_uid,d.sn,d.status,y.last_trip_end_time "
+        StringBuffer sb = new StringBuffer("select d.id ,y.vender_device_uid,y.sn,d.status,y.last_trip_end_time "
                 + "from t_device_extends_yz y left join t_device d "
                 + "on y.device_uid=d.id ");
         if (StringUtil.isNotNull(taskInfo.getExtrasArgs())) {
