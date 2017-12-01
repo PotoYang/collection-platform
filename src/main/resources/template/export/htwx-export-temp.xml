@@ -102,15 +102,14 @@
             <column name="last_accon_time"/>
         </columns>
     </export>
+
     <export id="12006" type="jdbc_batch" dataType="htwx_fault" batchNumber="100" target="exportOBD" enable="true">
-        <table name="t_device_trouble_code"/>
+        <table name="t_device_fault"/>
         <columns>
-            <column name="dtc_vaule" property="fault_code"/>
-            <column name="dtc_description" property="fault_desc"/>
-            <column name="dtc_status"/>
-            <column name="gps_time" property="utctime"/>
-            <column name="create_time" property="collection_time"/>
-            <column name="device_id"/>
+            <column name="warning_code" property="fault_code"/>
+            <column name="status" property="fault_flag"/>
+            <column name="gps_time" property="collection_time"/>
+            <column name="device_id" property="device_id"/>
         </columns>
     </export>
 
@@ -410,8 +409,6 @@
             <column name="f_2164"/>
         </columns>
     </export>
-
-
 
 
 </templates>
